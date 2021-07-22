@@ -16,7 +16,7 @@ const discord = require('discord.js')
 
 /// // //
 
-const clientSystem = 
+
 // // //
 
 // Old Code
