@@ -11,33 +11,55 @@
 
 // // //
 
-const fs = require('fs');
-const discord = require('discord.js');
+const fs = require('fs')
+const discord = require('discord.js')
+
+/// // //
+
+const clientSystem = 
+// // //
+
+// Old Code
+
+// // //
+// Structure Setup
+
+// node_modules
+// modules
+// settings
+// events
+// startup
+// functions
 
 // // //
 
-const clientSystem = './System/Client';
+//const fs = require('fs');
+//const discord = require('discord.js');
 
 // // //
 
-const token = process.env.TOKEN;
-const prefix = process.env.PREFIX;
+//const clientSystem = './System/Client';
+
+// // //
+
+//const token = process.env.TOKEN;
+//const prefix = process.env.PREFIX;
 
 //
 
-const client = new discord.Client();
+//const client = new discord.Client();
 
 //
 
-client.login(token);
+//client.login(token);
 
 //
 
-const clientFiles = fs
-	.readdirSync(clientSystem)
-	.filter(file => file.endsWith('.js'));
+//const clientFiles = fs
+//	.readdirSync(clientSystem)
+//	.filter(file => file.endsWith('.js'));
 
-for (const file of clientFiles) {
-	const clientFile = require(clientSystem + '/' + file);
-	clientFile(client);
-}
+//for (const file of clientFiles) {
+//	const clientFile = require(clientSystem + '/' + file);
+//	clientFile(client);
+//}
