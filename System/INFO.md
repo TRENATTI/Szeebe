@@ -1,0 +1,1 @@
+All files in operation are stored under System. The directories all link past System, and are headed by Index.js
