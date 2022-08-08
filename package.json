@@ -10,8 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "axios": "^0.20.0",
+    "bloxy": "^5.0.34",
+    "discord.js": "^12.5.3",
     "express": "^4.17.1",
+    "noblox.js": "^4.7.3",
+    "request": "^2.88.2",
+    "requests": "^0.3.0",
     "server.js": "^1.0.0"
   }
 }

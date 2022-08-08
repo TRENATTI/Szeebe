@@ -19,6 +19,10 @@ function commands(client) {
     }
     client.on('message', message => {
         if (message.author.bot) return
+<<<<<<< Updated upstream
+=======
+        if (!message.content.startsWith('s>')) return
+>>>>>>> Stashed changes
         const args = message.content.slice(process.env.PREFIX.length).split(' ');
         const commandName = args.shift().toLowerCase()
         const command = client.commands.get(commandName)
