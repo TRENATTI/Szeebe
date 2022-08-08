@@ -1,5 +1,9 @@
 function messages(client) {
     client.on('message', message => {
+<<<<<<< Updated upstream
+=======
+        if (message.guildid == 465248301504266241) return
+>>>>>>> Stashed changes
         if (message.author.bot) return
         if (message.content.toLowerCase() == 'hi') {
            message.channel.send('hello there <@' + message.author.id + '>')
@@ -19,8 +23,13 @@ function messages(client) {
         if (message.content.toLowerCase().indexOf('birthday') != -1) {
            message.channel.send('Happy Birthday!!!')
         }
+<<<<<<< Updated upstream
         if (message.content.toLowerCase().indexOf('scrizeebe') != -1) {
            message.channel.send('script*')
+=======
+        if (message.content.toLowerCase() == 'cat') {
+           message.channel.send("https://cdn.discordapp.com/attachments/539548593321672734/880195504997294170/E9b2IiAXsAM004K.png")
+>>>>>>> Stashed changes
         }
         
         // conch
