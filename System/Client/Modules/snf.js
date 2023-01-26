@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports = {
     name: 'snf',
     description: 'Says news image in Embed',
