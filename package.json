@@ -13,6 +13,7 @@
     "axios": "^0.20.0",
     "bloxy": "^5.0.34",
     "discord.js": "^12.5.3",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "noblox.js": "^4.7.3",
     "request": "^2.88.2",
