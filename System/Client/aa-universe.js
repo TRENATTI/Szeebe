@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+require('dotenv').config();
 const { stringify } = require('querystring');
 async function messages(client, noblox, currentUser, admin) {
     var db = admin.database();

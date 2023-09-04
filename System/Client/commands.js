@@ -1,6 +1,7 @@
-const fs = require('fs')
+require('dotenv').config();
+const fs = require("fs");
 const { Collection } = require("discord.js");
-
+const env = require("dotenv");
 //
 
 const moduleSystem = './System/Client/Modules'

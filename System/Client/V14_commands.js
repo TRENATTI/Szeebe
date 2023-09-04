@@ -1,4 +1,5 @@
 const fs = require("fs");
+require('dotenv').config();
 //const Discord = require('discord.js') -- Discord V12
 const { Collection } = require("discord.js");
 const { REST } = require("@discordjs/rest"); // -- Discord V14

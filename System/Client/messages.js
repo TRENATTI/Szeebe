@@ -1,5 +1,7 @@
 // DISABLED AS OF 7/21/2023 5:38 PM CST - SI
 // phrases.js REPLACES messages.js
+require('dotenv').config();
+
 function messages(client) {
     client.on('messageCreate', message => {
         //if (message.guildid == 465248301504266241) return

@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 const { ActivityType } = require("discord.js"); // Discord.js V14
 function status(client, noblox, currentUser) {
