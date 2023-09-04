@@ -19,6 +19,6 @@ module.exports = {
                 "description": days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds.",
                 timestamp: new Date()
         }
-        return message.channel.send({ embed: embedAA });
+        return message.channel.send({ embeds: [embedAA] })
     }
 }
