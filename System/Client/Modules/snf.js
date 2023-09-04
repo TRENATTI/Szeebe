@@ -1,11 +1,9 @@
-require('dotenv').config();
 module.exports = {
     name: 'snf',
     description: 'Says news image in Embed',
     aliases: ['snf'],
     execute(message, args) {
         stringargs = message.content.slice(process.env.PREFIX.length+4)
-        if (!message.author.id == 170639211182030850) return;
         const embedAA = {
                 "author": {
                     "name": message.author.username,
@@ -20,6 +18,6 @@ module.exports = {
                 },
                 timestamp: new Date()
         }
-        return message.channel.send({ embed: embedAA })
+        return message.channel.send({ embeds: [embedAA] })
     }
 }

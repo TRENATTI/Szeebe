@@ -1,4 +1,3 @@
-require('dotenv').config();
 module.exports = {
     name: 'sn',
     description: 'Says news in Embed',
@@ -21,6 +20,6 @@ module.exports = {
                 },
                 timestamp: new Date()
         }
-        return message.channel.send({ embed: embedAA })
+        return message.channel.send({ embeds: [embedAA] })
     }
 }
