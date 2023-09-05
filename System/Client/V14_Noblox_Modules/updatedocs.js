@@ -122,8 +122,12 @@ module.exports = {
 										{ responseType: "arraybuffer" }
 									)
 									.then(({ dataz }) => {
-										console.log(dataz.data.toString("latin1"));
-                                        console.log(JSON.parse(dataz.toString("latin1")))
+										console.log(
+											dataz.data.toString("latin1")
+										);
+										console.log(
+											JSON.parse(dataz.toString("latin1"))
+										);
 									})
 									.catch((err) => console.error(err));
 							}
