@@ -18,6 +18,7 @@ module.exports = {
 		.setName("updatedocs")
 		.setDescription(`Admin internal command. Updates docs.`),
 	async execute(interaction, noblox, admin) {
+		var db = admin.database();
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
@@ -30,7 +31,7 @@ module.exports = {
 		} else {
 			return interaction
 				.reply({
-					content: `Sorry ${message.author}, but only the owners can run that command!`,
+					content: `Sorry ${interaction.author}, but only the owners can run that command!`,
 				})
 				.then((message) =>
 					message.delete({ timeout: 5000, reason: "delete" })
@@ -38,21 +39,32 @@ module.exports = {
 		}
 
 		async function isAuthorized() {
-			var db = admin.database();
-			const userdata = [];
-			var ref = db
-				.ref("szeebe")
-				.child("alapha-universe-docs")
-				.child("groups");
-			ref.once("value", (snapshot) => {
-				snapshot.forEach((childSnapshot) => {
-					var childKey = childSnapshot.key;
-					var childData = childSnapshot.val();
-					console.log(childKey, childData);
-					userdata.push({ childKey, childData });
-				});
-				checkRanks(userdata);
+			const isReady = db.ref("szeebe/alapha-universe-docs-ready");
+
+			// Attach an asynchronous callback to read the data at our posts reference
+			isReady.once("value", (snapshot) => {
+				console.log(snapshot.val());
+				if (snapshot.val()) {
+					isReady.set(false);
+					start();
+				}
 			});
+			async function start() {
+				const userdata = [];
+				var ref = db
+					.ref("szeebe")
+					.child("alapha-universe-docs")
+					.child("groups");
+				ref.once("value", (snapshot) => {
+					snapshot.forEach((childSnapshot) => {
+						var childKey = childSnapshot.key;
+						var childData = childSnapshot.val();
+						console.log(childKey, childData);
+						userdata.push({ childKey, childData });
+					});
+					checkRanks(userdata);
+				});
+			}
 		}
 		async function checkRanks(userData) {
 			console.log(userData);
@@ -91,6 +103,11 @@ module.exports = {
 						console.log(str);
 						console.log(strgD);
 						console.log(str == strgD);
+						if (i == userData.length - 1) {
+							db.ref("szeebe/alapha-universe-docs-ready").set(
+								true
+							);
+						}
 					}
 				}, i * 7500);
 			}
