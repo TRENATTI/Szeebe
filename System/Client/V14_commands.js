@@ -39,7 +39,7 @@ function commands(client, noblox, currentUser, admin) {
 			commands.push(commandFile.data.toJSON());
 			client.commands.set(commandFile.data.name, commandFile);
 		} catch (err) {
-			console.log(err);
+			console.log(new Date(), "| V14_commmands.js", err);
 		}
 
 		// -- ^ Discord.js V14 ^
@@ -55,7 +55,7 @@ function commands(client, noblox, currentUser, admin) {
 			commands.push(commandFile.data.toJSON());
 			client.commands.set(commandFile.data.name, commandFile);
 		} catch (err) {
-			console.log(err);
+			console.log(new Date(), "| V14_commmands.js", err);
 		}
 
 		// -- ^ Discord.js V14 ^
@@ -145,7 +145,7 @@ function commands(client, noblox, currentUser, admin) {
 		try {
 			console.log(
 				new Date(),
-				`| commands.js | Started refreshing ${commands.length} application (/) commands.`
+				`| V14_commands.js | Started refreshing ${commands.length} application (/) commands.`
 			);
 
 			const data = await rest.put(
@@ -155,7 +155,7 @@ function commands(client, noblox, currentUser, admin) {
 
 			console.log(
 				new Date(),
-				`| commands.js | Successfully reloaded ${data.length} application (/) commands.`
+				`| V14_commands.js | Successfully reloaded ${data.length} application (/) commands.`
 			);
 		} catch (error) {
 			console.error(new Date(), `| commands.js |`, error);
