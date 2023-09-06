@@ -14,7 +14,7 @@ Multi-purpose bot, designed for entertainment and utility purposes.
 <div align="center">
 <a href="#about">About</a> •
 <a href="#prerequisites">Prerequisites</a> •
-<a href="#getting-started">Getting started</a> •
+<a href="#getting-started">Getting started</a>
 </div>
 
 ---------------
