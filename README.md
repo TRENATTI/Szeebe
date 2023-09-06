@@ -6,7 +6,6 @@ Multi-purpose bot, designed for entertainment and utility purposes.
 <br>
 <img src="https://img.shields.io/github/commit-activity/t/Alpha-Authority/Szeebe">
 <img src="https://img.shields.io/github/last-commit/Alpha-Authority/Szeebe">
-<img src="https://img.shields.io/github/languages/top/Alpha-Authority/Szeebe">
 <img src="https://img.shields.io/github/license/Alpha-Authority/Szeebe">
 <br>
 </div>
