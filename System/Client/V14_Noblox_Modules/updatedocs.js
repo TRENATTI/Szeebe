@@ -83,18 +83,18 @@ module.exports = {
 					}
 					async function getGroupGithub(groupInfo) {
 						const res = await axios.get(
-							`https://raw.githack.com/Alpha-Authority/alapha-universe-docs/main/Docs/Groups/${userData[i].childKey}.json`
+							`https://raw.githack.com/Alpha-Authority/alapha-universe-docs/main/Docs/Groups/${userData[i].childKey}/getGroup.json`
 						);
 						var newdatastring = JSON.stringify(res.data);
 						var newdatajson = JSON.parse(newdatastring);
 						var newdatajsonstring = JSON.stringify(newdatajson);
 						const file = fs.writeFileSync(
-							`Docs/Groups/${userData[i].childKey}.json`,
+							`Docs/Groups/${userData[i].childKey}/getGroup.json`,
 							newdatajsonstring,
 							"utf8"
 						);
 
-						const datafile2 = require(`../../../Docs/Groups/${userData[i].childKey}.json`);
+						const datafile2 = require(`../../../Docs/Groups/${userData[i].childKey}/getGroup.json`);
 						var str = JSON.stringify(datafile2);
 						var strgD = JSON.stringify(groupInfo);
 						console.log(datafile2);
