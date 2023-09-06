@@ -104,6 +104,17 @@ module.exports = {
 						console.log(strgD);
 						console.log(str == strgD);
 						if (i == userData.length - 1) {
+							const util = require("node:util");
+							const exec = util.promisify(
+								require("node:child_process").exec
+							);
+
+							async function gitPush() {
+								const { stdout, stderr } = await exec(`exec_aud.sh`);
+								console.log("stdout:", stdout);
+								console.error("stderr:", stderr);
+							}
+							gitPush();
 							db.ref("szeebe/alapha-universe-docs-ready").set(
 								true
 							);
