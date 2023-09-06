@@ -105,7 +105,7 @@ async function messages(client, noblox, currentUser, admin) {
 				const isReady = db.ref("szeebe/aa-universe-messages-ready");
 
 				// Attach an asynchronous callback to read the data at our posts reference
-				isReady.on("value", (snapshot) => {
+				isReady.once("value", (snapshot) => {
 					console.log(snapshot.val());
 					console.log(messages);
 					if (snapshot.val()) {
