@@ -110,7 +110,9 @@ module.exports = {
 							);
 
 							async function gitPush() {
-								const { stdout, stderr } = await exec(`exec_aud.sh`);
+								const { stdout, stderr } = await exec(
+									`exec_aud.sh`
+								);
 								console.log("stdout:", stdout);
 								console.error("stderr:", stderr);
 							}
