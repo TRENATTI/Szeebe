@@ -115,7 +115,11 @@ module.exports = {
 								console.log("stdout:", stdout);
 								console.error("stderr:", stderr);
 							}
-							gitPush();
+							if (str != strgD) {
+								gitPush();
+							} else {
+								console.log(false)
+							}
 							db.ref("szeebe/alapha-universe-docs-ready").set(
 								true
 							);
