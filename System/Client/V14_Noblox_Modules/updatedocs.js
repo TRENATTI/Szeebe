@@ -88,12 +88,12 @@ module.exports = {
 						var newdatajson = JSON.parse(newdatastring);
 						var newdatajsonstring = JSON.stringify(newdatajson);
 						const file = fs.writeFileSync(
-							`Docs/Groups/${userData[i].childKey}/getGroup.json`,
+							`Aud/Docs/Groups/${userData[i].childKey}/getGroup.json`,
 							newdatajsonstring,
 							"utf8"
 						);
 
-						const datafile2 = require(`../../../Docs/Groups/${userData[i].childKey}/getGroup.json`);
+						const datafile2 = require(`../../../Aud/Docs/Groups/${userData[i].childKey}/getGroup.json`);
 						var str = JSON.stringify(datafile2);
 						var strgD = JSON.stringify(groupInfo);
 						console.log(datafile2);
