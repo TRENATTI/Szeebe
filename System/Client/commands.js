@@ -1,68 +1,76 @@
-const fs = require('fs')
+require("dotenv").config();
+const fs = require("fs");
 const { Collection } = require("discord.js");
+const env = require("dotenv");
+//
+
+const moduleSystem = "./System/Client/Modules";
+const moduleNobloxSystem = "./System/Client/Noblox_Modules";
 
 //
 
-const moduleSystem = './System/Client/Modules'
-const moduleNobloxSystem = './System/Client/Noblox_Modules'
-
-//
-
-const moduleFiles = fs.readdirSync(moduleSystem).filter(file => file.endsWith('.js'));
-const moduleNobloxFiles = fs.readdirSync(moduleNobloxSystem).filter(file => file.endsWith('.js'));
+const moduleFiles = fs
+	.readdirSync(moduleSystem)
+	.filter((file) => file.endsWith(".js"));
+const moduleNobloxFiles = fs
+	.readdirSync(moduleNobloxSystem)
+	.filter((file) => file.endsWith(".js"));
 
 //
 
 function commands(client, noblox, currentUser, admin) {
-    client.commands_v12 = new Collection();
-    for (const file of moduleFiles) {
-        const commandFile = require('./Modules/' + file);
-        client.commands_v12.set(commandFile.name, commandFile)
-    }
-    for (const file of moduleNobloxFiles) {
-        const commandFile = require('./Noblox_Modules/' + file);
-        client.commands_v12.set(commandFile.name, commandFile)
-    }
-    client.on('messageCreate', message => {
-        if (message.author.bot) return
-        if (!message.content.startsWith(process.env.PREFIX)) return
-        const args = message.content.slice(process.env.PREFIX.length).split(' ');
-        const commandName = args.shift().toLowerCase()
-        const command = client.commands_v12.get(commandName)
-            || client.commands_v12.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-        if (!command) return;
-        if (command.guildOnly && message.channel.type === 'dm') {
-            return message.reply('I can\'t execute that command inside DMs!');
-        } // SEE LINE 55 (message.channel.type.dm)
+	client.commands_v12 = new Collection();
+	for (const file of moduleFiles) {
+		const commandFile = require("./Modules/" + file);
+		client.commands_v12.set(commandFile.name, commandFile);
+	}
+	for (const file of moduleNobloxFiles) {
+		const commandFile = require("./Noblox_Modules/" + file);
+		client.commands_v12.set(commandFile.name, commandFile);
+	}
+	client.on("messageCreate", (message) => {
+		if (message.author.bot) return;
+		if (!message.content.startsWith(process.env.PREFIX)) return;
+		const args = message.content
+			.slice(process.env.PREFIX.length)
+			.split(" ");
+		const commandName = args.shift().toLowerCase();
+		const command =
+			client.commands_v12.get(commandName) ||
+			client.commands_v12.find(
+				(cmd) => cmd.aliases && cmd.aliases.includes(commandName)
+			);
+		if (!command) return;
+		if (command.guildOnly && message.channel.type === "dm") {
+			return message.reply("I can't execute that command inside DMs!");
+		} // SEE LINE 55 (message.channel.type.dm)
 
+		if (command.args && !args.length) {
+			let reply = `You didn't provide any arguments, ${message.author}!`;
 
-        if (command.args && !args.length) {
-            let reply = `You didn't provide any arguments, ${message.author}!`;
+			if (command.usage) {
+				reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+			}
 
-            if (command.usage) {
-                reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-            }
+			return message.channel.send(reply);
+		}
 
-            return message.channel.send(reply);
-        }
-
-        if (command.noblox) {
-            try {
-                command.execute(message, args, client, noblox, admin);
-            } catch {
-                message.reply('Unavailable command!');
-                console.log('Failed!');
-            }    
-        } else {
-            try {
-            command.execute(message, args, client);
-            } catch {
-                message.reply('Unavailable command!');
-                console.log('Failed!');
-            }
-        }
-
-    });
+		if (command.noblox) {
+			try {
+				command.execute(message, args, client, noblox, admin);
+			} catch {
+				message.reply("Unavailable command!");
+				console.log("Failed!");
+			}
+		} else {
+			try {
+				command.execute(message, args, client);
+			} catch {
+				message.reply("Unavailable command!");
+				console.log("Failed!");
+			}
+		}
+	});
 }
 
 module.exports = commands;
