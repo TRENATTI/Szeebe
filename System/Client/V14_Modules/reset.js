@@ -13,11 +13,7 @@ async function execSh(command) {
 }
 
 function reset() {
-	execSh("pm2 stop index");
-
-	setTimeout(() => {
-		execSh("pm2 start index");
-	}, 5000);
+	execSh("pm2 restart all")
 }
 
 module.exports = {
