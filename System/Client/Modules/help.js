@@ -71,7 +71,7 @@ module.exports = {
 				description: y,
 				timestamp: new Date(),
 			};
-			return message.channel.send({ embeds: [embedAA] });
+			return message.reply({ embeds: [embedAA] });
 			//    .then(() => {
 			//        if (message.channel.type === 'dm') return;
 			//        // message.reply('I\'ve sent you a DM with all my commands!');
@@ -127,7 +127,7 @@ module.exports = {
 				description: y,
 				timestamp: new Date(),
 			};
-			return message.channel.send({ embeds: [embedAA] });
+			return message.reply({ embeds: [embedAA] });
 		}
 	},
 };
