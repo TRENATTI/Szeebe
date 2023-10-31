@@ -10,13 +10,34 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const data = [];
-		const commands = interaction.client.commands;
+		const v12_commands = interaction.client.commands_v12;
+		const v14_commands = interaction.client.v14_commands;
+		const phrase_commands = interaction.client.phrases_v12;
 		data.push();
-		data.push("Here's a list of all my commands:");
+		data.push("Here's a list of message based commands using my prefix!");
 		data.push(
 			"``" +
-				commands
+				v12_commands
+					.map((command) => command.name)
+					.sort()
+					.join("``, ``") +
+				"``"
+		);
+
+		data.push( `\nHere's a list of my slash commands!`);
+		data.push(
+			"``" +
+				v14_commands
 					.map((command) => command.data.name)
+					.sort()
+					.join("``, ``") +
+				"``"
+		);
+		data.push( `\nHere's a list of my phrases!`);
+		data.push(
+			"``" +
+				phrase_commands
+					.map((phrase) => phrase.name)
 					.sort()
 					.join("``, ``") +
 				"``"

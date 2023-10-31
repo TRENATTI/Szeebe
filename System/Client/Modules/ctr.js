@@ -5,7 +5,7 @@ module.exports = {
 	execute(message, args) {
 		const thisdateedited = Date.parse(`${message.content.slice(6)}`) / 1000;
 		console.log(thisdateedited);
-		return message.channel.send(
+		return message.reply(
 			`<t:${thisdateedited}:R> / ` +
 				"``<t:" +
 				`${thisdateedited}` +

@@ -18,7 +18,15 @@ const moduleNobloxFiles = fs
 
 //
 
-function commands(client, noblox, currentUser, admin) {
+function commands(
+	client,
+	noblox,
+	currentUser,
+	admin,
+	token,
+	applicationid,
+	prefix
+) {
 	client.commands_v12 = new Collection();
 	for (const file of moduleFiles) {
 		const commandFile = require("./Modules/" + file);
@@ -30,10 +38,8 @@ function commands(client, noblox, currentUser, admin) {
 	}
 	client.on("messageCreate", (message) => {
 		if (message.author.bot) return;
-		if (!message.content.startsWith(process.env.PREFIX)) return;
-		const args = message.content
-			.slice(process.env.PREFIX.length)
-			.split(" ");
+		if (!message.content.startsWith(prefix)) return;
+		const args = message.content.slice(prefix.length).split(" ");
 		const commandName = args.shift().toLowerCase();
 		const command =
 			client.commands_v12.get(commandName) ||
@@ -58,16 +64,40 @@ function commands(client, noblox, currentUser, admin) {
 		if (command.noblox) {
 			try {
 				command.execute(message, args, client, noblox, admin);
-			} catch {
-				message.reply("Unavailable command!");
-				console.log("Failed!");
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
+				);
+			} catch (error) {
+				message.reply(
+					"There was an error while executing this command!"
+				);
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] failed to run an message command! (${commandName})\nError:`,
+					error
+				);
 			}
 		} else {
 			try {
 				command.execute(message, args, client);
-			} catch {
-				message.reply("Unavailable command!");
-				console.log("Failed!");
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
+				);
+			} catch (error) {
+				message.reply(
+					"There was an error while executing this command!"
+				);
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] failed to run an message command! (${commandName})\nError:`,
+					error
+				);
 			}
 		}
 	});

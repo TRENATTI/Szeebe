@@ -22,6 +22,7 @@ function commands(client) {
 	}
 	client.on("messageCreate", (message) => {
 		if (message.author.bot) return;
+		if (message.client.user.id == 481512678163087363) return;
 		const phraseName = message.content.toLowerCase();
 		const phrase =
 			client.phrases_v12.get(phraseName) ||

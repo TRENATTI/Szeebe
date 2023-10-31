@@ -1,8 +1,7 @@
 require("dotenv").config();
 
 const { ActivityType } = require("discord.js"); // Discord.js V14
-function status(client, noblox, currentUser) {
-	const prefix = process.env.PREFIX;
+function status(client, noblox, currentUser, admin, token, applicationid, prefix) {
 	client.once("ready", () => {
 		console.log(
 			new Date(),
@@ -25,7 +24,7 @@ function status(client, noblox, currentUser) {
 				client.user.setPresence({
 					activities: [
 						{
-							name: `/help & s>help | ${
+							name: `/help & ${prefix}help | ${
 								activities[i++ % activities.length]
 							}`,
 							type: ActivityType.Listening,

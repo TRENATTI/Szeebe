@@ -23,10 +23,34 @@ const clientSystem = "./System/Client";
 
 // // //
 
-const token = process.env.TOKEN;
-const prefix = process.env.PREFIX;
+function getKeys(flags) {
+	if (process.env.DEVELOPER_MODE == "true") {
+		if (flags == "token") {
+			return process.env.TESTING_TOKEN;
+		} else if (flags == "rbxcookie") {
+			return process.env.TESTING_RBXCOOKIE;
+		} else if (flags == "applicationid") {
+			return process.env.TESTING_APPLICATION_ID;
+		} else if (flags == "prefix") {
+			return process.env.TESTING_PREFIX;
+		}
+	} else {
+		if (flags == "token") {
+			return process.env.TOKEN;
+		} else if (flags == "rbxcookie") {
+			return process.env.TESTING_RBXCOOKIE;
+		} else if (flags == "applicationid") {
+			return process.env.APPLICATION_ID;
+		} else if (flags == "prefix") {
+			return process.env.PREFIX;
+		}
+	}
+}
 
-const rbxcookie = process.env.RBXCOOKIE;
+const token = getKeys("token");
+const prefix = getKeys("prefix");
+const applicationid = getKeys("applicationid");
+const rbxcookie = getKeys("rbxcookie");
 
 //
 
@@ -37,7 +61,15 @@ async function startApp(currentUser, client, admin) {
 
 	for (const file of clientFiles) {
 		const clientFile = require(clientSystem + "/" + file);
-		clientFile(client, noblox, currentUser, admin);
+		clientFile(
+			client,
+			noblox,
+			currentUser,
+			admin,
+			token,
+			applicationid,
+			prefix
+		);
 	}
 }
 
@@ -66,9 +98,24 @@ async function startFirebase(currentUser, client) {
 
 	startApp(currentUser, client, admin);
 }
+
+async function startNoblox(client) {
+	// You MUST call setCookie() before using any authenticated methods [marked by 🔐]
+	// Replace the parameter in setCookie() with your .ROBLOSECURITY cookie.
+	const currentUser = await noblox.setCookie(`${rbxcookie}`);
+	console.log(
+		new Date(),
+		`| index.js |`,
+		`Logged in as ${currentUser.UserName} [${currentUser.UserID}]`
+	);
+
+	// Do everything else, calling functions and the like.
+	startFirebase(currentUser, client);
+}
+
 //
 
-async function startDiscord(currentUser) {
+async function startDiscord() {
 	const client = new Client({
 		intents: [
 			GatewayIntentBits.Guilds,
@@ -82,23 +129,9 @@ async function startDiscord(currentUser) {
 
 	client.login(token);
 
-	startFirebase(currentUser, client);
+	startNoblox(client);
 }
 
 //
 
-async function startNoblox() {
-	// You MUST call setCookie() before using any authenticated methods [marked by 🔐]
-	// Replace the parameter in setCookie() with your .ROBLOSECURITY cookie.
-	const currentUser = await noblox.setCookie(`${rbxcookie}`);
-	console.log(
-		new Date(),
-		`| index.js |`,
-		`Logged in as ${currentUser.UserName} [${currentUser.UserID}]`
-	);
-
-	// Do everything else, calling functions and the like.
-	startDiscord(currentUser);
-}
-
-startNoblox();
+startDiscord();

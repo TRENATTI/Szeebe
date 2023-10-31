@@ -12,15 +12,41 @@ module.exports = {
 		const commands = client.commands_v12;
 
 		if (!args.length) {
-			data.push("Here's a list of all my commands:");
+			const v12_commands = client.commands_v12;
+			const v14_commands = client.v14_commands;
+			const phrase_commands = client.phrases_v12;
+			data.push();
+			data.push(
+				"Here's a list of message based commands using my prefix!"
+			);
 			data.push(
 				"``" +
-					commands.map((command) => command.name).join("``, ``") +
+					v12_commands
+						.map((command) => command.name)
+						.sort()
+						.join("``, ``") +
 					"``"
 			);
+
+			data.push(`\nHere's a list of my slash commands!`);
 			data.push(
-				`\nYou can send \`${process.env.PREFIX}help [command name]\` to get info on a specific command!`
+				"``" +
+					v14_commands
+						.map((command) => command.data.name)
+						.sort()
+						.join("``, ``") +
+					"``"
 			);
+			data.push(`\nHere's a list of my phrases!`);
+			data.push(
+				"``" +
+					phrase_commands
+						.map((phrase) => phrase.name)
+						.sort()
+						.join("``, ``") +
+					"``"
+			);
+			//data.push(`\nYou can send \`${process.env.PREFIX}help [command name]\` to get info on a specific command!`);
 			var x;
 			var y = ``;
 			for (x of data) {
@@ -45,7 +71,7 @@ module.exports = {
 				description: y,
 				timestamp: new Date(),
 			};
-			return message.channel.send({ embeds: [embedAA] });
+			return message.reply({ embeds: [embedAA] });
 			//    .then(() => {
 			//        if (message.channel.type === 'dm') return;
 			//        // message.reply('I\'ve sent you a DM with all my commands!');
@@ -101,7 +127,7 @@ module.exports = {
 				description: y,
 				timestamp: new Date(),
 			};
-			return message.channel.send({ embeds: [embedAA] });
+			return message.reply({ embeds: [embedAA] });
 		}
 	},
 };

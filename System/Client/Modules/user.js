@@ -21,6 +21,6 @@ module.exports = {
 			description: `Your username: ${message.author.username}\nYour ID: ${message.author.id}`,
 			timestamp: new Date(),
 		};
-		return message.channel.send({ embeds: [embedAA] });
+		return message.reply({ embeds: [embedAA] });
 	},
 };

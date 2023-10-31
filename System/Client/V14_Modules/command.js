@@ -9,7 +9,7 @@ module.exports = {
 			option
 				.setName("name")
 				.setDescription(`The command name to be searched for.`)
-				.setRequired(false)
+				.setRequired(true)
 		),
 	subdata: {
 		usage: "<name>",
@@ -17,7 +17,7 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const data = [];
-		const commands = interaction.client.commands;
+		const commands = interaction.client.v14_commands;
 		const command = commands.get(interaction.options.getString("name"));
 
 		if (!command) {

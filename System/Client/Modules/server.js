@@ -3,7 +3,7 @@ module.exports = {
 	description: "Server info.",
 	aliases: ["serverinfo"],
 	execute(message, args) {
-		return message.channel.send(
+		return message.reply(
 			`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`
 		);
 	},

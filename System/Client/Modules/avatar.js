@@ -4,7 +4,7 @@ module.exports = {
 	aliases: ["av"],
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.author;
-		return message.channel.send(
+		return message.reply(
 			`\`\`${user.tag}\`\`'s avatar: ${user.displayAvatarURL({
 				format: "png",
 				dynamic: true,

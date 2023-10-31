@@ -1,12 +1,27 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const util = require("util");
+const child_process = require("child_process");
+const process = require("process");
 require("dotenv").config();
+
+const exec = util.promisify(child_process.exec);
+
+async function execSh(command) {
+	await exec(command, { windowsHide: true }, (e, stdout, stderr) => {
+		console.log(`${stdout}\n`);
+	});
+}
+
+function reset() {
+	execSh("pm2 restart all")
+}
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("reset")
 		.setDescription("Admin internal command."),
 	subdata: {
-		cooldown: 3,
+		cooldown: 15,
 	},
 	async execute(interaction) {
 		if (
@@ -18,8 +33,7 @@ module.exports = {
 				.reply({
 					content: `Resetting...`,
 				})
-				.then((msg) => interaction.client.destroy())
-				.then(() => interaction.client.login(process.env.TOKEN));
+				.then(reset());
 		} else {
 			return interaction.reply({
 				content: `Sorry ${message.author}, but only the owners can run that command!`,

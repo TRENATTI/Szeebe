@@ -24,9 +24,9 @@ const moduleNobloxFiles = fs
 
 //console.log(test([{Type: 'embed', Data: 'yes'},{Type: 'actionrowbuilder', Data: [{type: 2, components: [{type: 1, label: 'yes', style: 1, custom_id: '5'}]}]}]))
 
-function commands(client, noblox, currentUser, admin) {
+function commands(client, noblox, currentUser, admin, token, applicationid, prefix) {
 	//client.commands = new Discord.Collection() -- Discord.js V12
-	client.commands = new Collection(); //-- Discord.js V14
+	client.v14_commands = new Collection(); //-- Discord.js V14
 	const commands = [];
 	for (const file of moduleFiles) {
 		//const commandFile = require('./Modules/' + file); commandFile) // -- Discord.js V12
@@ -37,7 +37,7 @@ function commands(client, noblox, currentUser, admin) {
 		try {
 			const commandFile = require(`./V14_Modules/${file}`);
 			commands.push(commandFile.data.toJSON());
-			client.commands.set(commandFile.data.name, commandFile);
+			client.v14_commands.set(commandFile.data.name, commandFile);
 		} catch (err) {
 			console.log(new Date(), "| V14_commmands.js", err);
 		}
@@ -53,7 +53,7 @@ function commands(client, noblox, currentUser, admin) {
 		try {
 			const commandFile = require(`./V14_Noblox_Modules/${file}`);
 			commands.push(commandFile.data.toJSON());
-			client.commands.set(commandFile.data.name, commandFile);
+			client.v14_commands.set(commandFile.data.name, commandFile);
 		} catch (err) {
 			console.log(new Date(), "| V14_commmands.js", err);
 		}
@@ -139,7 +139,7 @@ function commands(client, noblox, currentUser, admin) {
 	//    }
 	//})();
 
-	const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+	const rest = new REST({ version: "10" }).setToken(token);
 
 	(async () => {
 		try {
@@ -149,7 +149,7 @@ function commands(client, noblox, currentUser, admin) {
 			);
 
 			const data = await rest.put(
-				Routes.applicationCommands(process.env.APPLICATION_ID),
+				Routes.applicationCommands(applicationid),
 				{ body: commands }
 			);
 
@@ -169,14 +169,24 @@ function commands(client, noblox, currentUser, admin) {
 	client.on("interactionCreate", async (interaction) => {
 		if (!interaction.isChatInputCommand()) return;
 
-		const command = client.commands.get(interaction.commandName); //-- Discord.js V14 Tutorial
+		const command = client.v14_commands.get(interaction.commandName); //-- Discord.js V14 Tutorial
 		//const command = commands.get(interaction.commandName);
 		if (!command) return;
 
 		try {
 			await command.execute(interaction, noblox, admin);
+			console.log(
+				new Date(),
+				"| V14_commmands.js |",
+				`${interaction.user.username} [${interaction.user.id}] successfully ran an interaction! (${interaction.commandName})`
+			);
 		} catch (error) {
-			console.error(error);
+			console.log(
+				new Date(),
+				"| V14_commmands.js |",
+				`${interaction.user.username} [${interaction.user.id}] failed to run an interaction! (${interaction.commandName})\nError:`,
+				error
+			);
 			await interaction.reply({
 				content: "There was an error while executing this command!",
 				ephemeral: true,
