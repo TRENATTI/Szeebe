@@ -67,7 +67,7 @@ function commands(
 				console.log(
 					new Date(),
 					"| commmands.js |",
-					`${message.author.tag} [${message.author.id}] successfully ran an interaction! (${commandName})`
+					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
 				);
 			} catch (error) {
 				message.reply(
@@ -76,7 +76,7 @@ function commands(
 				console.log(
 					new Date(),
 					"| commmands.js |",
-					`${message.user.tag} [${message.user.id}] failed to run an interaction! (${commandName})\nError:`,
+					`${message.author.tag} [${message.author.id}] failed to run an message command! (${commandName})\nError:`,
 					error
 				);
 			}
@@ -86,7 +86,7 @@ function commands(
 				console.log(
 					new Date(),
 					"| commmands.js |",
-					`${message.author.tag} [${message.author.id}] successfully ran an interaction! (${commandName})`
+					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
 				);
 			} catch (error) {
 				message.reply(
@@ -95,7 +95,7 @@ function commands(
 				console.log(
 					new Date(),
 					"| commmands.js |",
-					`${message.user.tag} [${message.user.id}] failed to run an interaction! (${commandName})\nError:`,
+					`${message.author.tag} [${message.author.id}] failed to run an message command! (${commandName})\nError:`,
 					error
 				);
 			}
