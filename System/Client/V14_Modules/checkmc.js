@@ -70,7 +70,7 @@ module.exports = {
 								dynamic: true,
 							}),
 						},
-						description: `No players online!`,
+						description: `**Scriptoria MC Server**\n\nNo players online!`,
 						timestamp: new Date(),
 					};
 					console.log(response);
