@@ -64,16 +64,40 @@ function commands(
 		if (command.noblox) {
 			try {
 				command.execute(message, args, client, noblox, admin);
-			} catch {
-				message.reply("Unavailable command!");
-				console.log("Failed!");
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] successfully ran an interaction! (${commandName})`
+				);
+			} catch (error) {
+				message.reply(
+					"There was an error while executing this command!"
+				);
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.user.tag} [${message.user.id}] failed to run an interaction! (${commandName})\nError:`,
+					error
+				);
 			}
 		} else {
 			try {
 				command.execute(message, args, client);
-			} catch {
-				message.reply("Unavailable command!");
-				console.log("Failed!");
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.author.tag} [${message.author.id}] successfully ran an interaction! (${commandName})`
+				);
+			} catch (error) {
+				message.reply(
+					"There was an error while executing this command!"
+				);
+				console.log(
+					new Date(),
+					"| commmands.js |",
+					`${message.user.tag} [${message.user.id}] failed to run an interaction! (${commandName})\nError:`,
+					error
+				);
 			}
 		}
 	});
