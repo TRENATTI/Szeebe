@@ -24,10 +24,10 @@ const moduleNobloxFiles = fs
 
 //console.log(test([{Type: 'embed', Data: 'yes'},{Type: 'actionrowbuilder', Data: [{type: 2, components: [{type: 1, label: 'yes', style: 1, custom_id: '5'}]}]}]))
 
-function commands(client, noblox, currentUser, admin) {
+function commands(client, noblox, currentUser, admin, token, applicationid) {
 	//client.commands = new Discord.Collection() -- Discord.js V12
 	client.commands = new Collection(); //-- Discord.js V14
-	const commands = [];
+	const commands = []
 	for (const file of moduleFiles) {
 		//const commandFile = require('./Modules/' + file); commandFile) // -- Discord.js V12
 		//client.commands.set(`normal.${commandFile.name}`, commandFile) // -- Discord.js V12
@@ -139,7 +139,7 @@ function commands(client, noblox, currentUser, admin) {
 	//    }
 	//})();
 
-	const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+	const rest = new REST({ version: "10" }).setToken(token);
 
 	(async () => {
 		try {
@@ -149,7 +149,7 @@ function commands(client, noblox, currentUser, admin) {
 			);
 
 			const data = await rest.put(
-				Routes.applicationCommands(client.user.id),
+				Routes.applicationCommands(applicationid),
 				{ body: commands }
 			);
 
