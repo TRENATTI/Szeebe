@@ -27,7 +27,7 @@ const moduleNobloxFiles = fs
 function commands(client, noblox, currentUser, admin, token, applicationid) {
 	//client.commands = new Discord.Collection() -- Discord.js V12
 	client.commands = new Collection(); //-- Discord.js V14
-	const commands = []
+	const commands = [];
 	for (const file of moduleFiles) {
 		//const commandFile = require('./Modules/' + file); commandFile) // -- Discord.js V12
 		//client.commands.set(`normal.${commandFile.name}`, commandFile) // -- Discord.js V12

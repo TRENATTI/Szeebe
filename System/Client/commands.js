@@ -18,7 +18,15 @@ const moduleNobloxFiles = fs
 
 //
 
-function commands(client, noblox, currentUser, admin, token, applicationid, prefix) {
+function commands(
+	client,
+	noblox,
+	currentUser,
+	admin,
+	token,
+	applicationid,
+	prefix
+) {
 	client.commands_v12 = new Collection();
 	for (const file of moduleFiles) {
 		const commandFile = require("./Modules/" + file);
@@ -31,9 +39,7 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 	client.on("messageCreate", (message) => {
 		if (message.author.bot) return;
 		if (!message.content.startsWith(prefix)) return;
-		const args = message.content
-			.slice(prefix.length)
-			.split(" ");
+		const args = message.content.slice(prefix.length).split(" ");
 		const commandName = args.shift().toLowerCase();
 		const command =
 			client.commands_v12.get(commandName) ||

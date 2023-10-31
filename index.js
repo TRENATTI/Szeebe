@@ -29,27 +29,27 @@ function getKeys(flags) {
 			return process.env.TESTING_TOKEN;
 		} else if (flags == "rbxcookie") {
 			return process.env.TESTING_RBXCOOKIE;
-		} else if (flags == "applicationid"){
-			return process.env.TESTING_APPLICATION_ID
-		} else if (flags == "prefix"){
-			return process.env.TESTING_PREFIX
+		} else if (flags == "applicationid") {
+			return process.env.TESTING_APPLICATION_ID;
+		} else if (flags == "prefix") {
+			return process.env.TESTING_PREFIX;
 		}
 	} else {
 		if (flags == "token") {
 			return process.env.TOKEN;
 		} else if (flags == "rbxcookie") {
 			return process.env.TESTING_RBXCOOKIE;
-		} else if (flags == "applicationid"){
-			return process.env.APPLICATION_ID
-		} else if (flags == "prefix"){
-			return process.env.PREFIX
+		} else if (flags == "applicationid") {
+			return process.env.APPLICATION_ID;
+		} else if (flags == "prefix") {
+			return process.env.PREFIX;
 		}
 	}
 }
 
 const token = getKeys("token");
-const prefix = getKeys("prefix")
-const applicationid = getKeys("applicationid") 
+const prefix = getKeys("prefix");
+const applicationid = getKeys("applicationid");
 const rbxcookie = getKeys("rbxcookie");
 
 //
@@ -61,7 +61,15 @@ async function startApp(currentUser, client, admin) {
 
 	for (const file of clientFiles) {
 		const clientFile = require(clientSystem + "/" + file);
-		clientFile(client, noblox, currentUser, admin, token, applicationid, prefix);
+		clientFile(
+			client,
+			noblox,
+			currentUser,
+			admin,
+			token,
+			applicationid,
+			prefix
+		);
 	}
 }
 
