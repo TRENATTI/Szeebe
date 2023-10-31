@@ -149,7 +149,7 @@ function commands(client, noblox, currentUser, admin) {
 			);
 
 			const data = await rest.put(
-				Routes.applicationCommands(process.env.APPLICATION_ID),
+				Routes.applicationCommands(client.user.id),
 				{ body: commands }
 			);
 
