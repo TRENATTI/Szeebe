@@ -3,125 +3,128 @@ const { EmbedBuilder, MessageManager } = require("discord.js");
 require("dotenv").config();
 const { stringify } = require("querystring");
 async function mcstatus(client, noblox, currentUser, admin) {
-	var db = admin.database();
-	client.once("ready", async () => {
-        if (process.env.DEVELOPER_MODE == true) return;
-		var iter = 0;
-		var ref = db.ref("szeebe").child("scriptoria-mc");
-		ref.limitToLast(10).once("value", (querySnapshot) => {
-			querySnapshot.forEach((querySnapshot2) => {
-				console.log(querySnapshot2.key, querySnapshot2.val());
-				querySnapshot2.forEach((thisObject) => {
-					//console.log(message.content);
+	if (process.env.DEVELOPER_MODE != "true") exec()
+	async function exec() {
 
-					//	if (message.guild.id == thisObject.val().serverId) {
-					//		console.log(true);
-					//		if (message.channel.id == thisObject.val().channelId) {
-					//			console.log(true);
-					sendFLIPPINGDATA(
-						thisObject.val().messageId,
-						thisObject.val().channelId,
-						thisObject.val().serverId,
-                        thisObject.key
-					);
-					//		}
-				});
-			});
-		});
-		async function sendData(messageId, channelId, serverId) {
-			querySnapshot.forEach((querySnapshot2) => {
-				console.log(querySnapshot2.key, querySnapshot2.val());
-				querySnapshot2.forEach((data) => {
-					console.log(data.val().serverId);
-					var guildId = data.val().serverId.toString();
-					console.log(guildId);
-					sendFLIPPINGDATA(guildId, data, theServerId);
-				});
-			});
-		}
-		async function sendFLIPPINGDATA(messageId, channelId, serverId) {
-			const guild = await client.guilds.fetch(`${serverId}`);
-			const channel = await guild.channels.fetch(channelId);
-			const message = await channel.messages.fetch(messageId);
-			//.then((message) => {
-			console.log(message.id, message.createdTimestamp, message.content);
-            setInterval(
-			() =>
-			MinecraftServerListPing.ping(4, "scriptoria.apexmc.co", 25681, 3000)
-				.then((response) => {
-					console.log(response);
+		var db = admin.database();
+		client.once("ready", async () => {
+			var iter = 0;
+			var ref = db.ref("szeebe").child("scriptoria-mc");
+			ref.limitToLast(10).once("value", (querySnapshot) => {
+				querySnapshot.forEach((querySnapshot2) => {
+					console.log(querySnapshot2.key, querySnapshot2.val());
+					querySnapshot2.forEach((thisObject) => {
+						//console.log(message.content);
 
-					if (response.players.sample) {
-						console.log(true);
-						var dataratatata = []; // Yes the Pokemon
-						dataratatata.push(`**Scriptoria MC Server**\n`);
-						dataratatata.push(
-							`${response.players.online} player(s) online!\n`
+						//	if (message.guild.id == thisObject.val().serverId) {
+						//		console.log(true);
+						//		if (message.channel.id == thisObject.val().channelId) {
+						//			console.log(true);
+						sendFLIPPINGDATA(
+							thisObject.val().messageId,
+							thisObject.val().channelId,
+							thisObject.val().serverId,
+							thisObject.key
 						);
-						dataratatata.push(`Player list:`);
-						var y = ``;
-						for (x of response.players.sample) {
-							y = y + "``" + x.name + "`` ";
-						}
-						dataratatata.push(y);
-						var desc = ``;
-						for (x of dataratatata) {
-							desc = desc + `\n` + x;
-						}
-						const embedAA = {
-							author: {
-								name: message.client.user.username,
-								icon_url:
-                                message.client.user.displayAvatarURL({
+						//		}
+					});
+				});
+			});
+			async function sendData(messageId, channelId, serverId) {
+				querySnapshot.forEach((querySnapshot2) => {
+					console.log(querySnapshot2.key, querySnapshot2.val());
+					querySnapshot2.forEach((data) => {
+						console.log(data.val().serverId);
+						var guildId = data.val().serverId.toString();
+						console.log(guildId);
+						sendFLIPPINGDATA(guildId, data, theServerId);
+					});
+				});
+			}
+			async function sendFLIPPINGDATA(messageId, channelId, serverId) {
+				const guild = await client.guilds.fetch(`${serverId}`);
+				const channel = await guild.channels.fetch(channelId);
+				const message = await channel.messages.fetch(messageId);
+				//.then((message) => {
+				console.log(message.id, message.createdTimestamp, message.content);
+				setInterval(
+				() =>
+				MinecraftServerListPing.ping(4, "scriptoria.apexmc.co", 25681, 3000)
+					.then((response) => {
+						console.log(response);
+
+						if (response.players.sample) {
+							console.log(true);
+							var dataratatata = []; // Yes the Pokemon
+							dataratatata.push(`**Scriptoria MC Server**\n`);
+							dataratatata.push(
+								`${response.players.online} player(s) online!\n`
+							);
+							dataratatata.push(`Player list:`);
+							var y = ``;
+							for (x of response.players.sample) {
+								y = y + "``" + x.name + "`` ";
+							}
+							dataratatata.push(y);
+							var desc = ``;
+							for (x of dataratatata) {
+								desc = desc + `\n` + x;
+							}
+							const embedAA = {
+								author: {
+									name: message.client.user.username,
+									icon_url:
+									message.client.user.displayAvatarURL({
+											format: "png",
+											dynamic: true,
+										}),
+								},
+								color: 0x0099ff,
+								footer: {
+									text: message.guild.name,
+									icon_url: message.guild.iconURL({
 										format: "png",
 										dynamic: true,
 									}),
-							},
-							color: 0x0099ff,
-							footer: {
-								text: message.guild.name,
-								icon_url: message.guild.iconURL({
-									format: "png",
-									dynamic: true,
-								}),
-							},
-							description: desc,
-							timestamp: new Date(),
-						};
-						console.log(response);
-						return message.edit({ embeds: [embedAA] });
-					} else {
-						const embedAA = {
-							author: {
-								name: message.client.user.username,
-								icon_url: message.client.user.displayAvatarURL({
-									format: "png",
-									dynamic: true,
-								}),
-							},
-							color: 0x0099ff,
-							footer: {
-								text: message.guild.name,
-								icon_url: message.guild.iconURL({
-									format: "png",
-									dynamic: true,
-								}),
-							},
-							description: `**Scriptoria MC Server**\n\nNo players online!`,
-							timestamp: new Date(),
-						};
-						console.log(response);
-						return message.edit({ embeds: [embedAA] });
-					}
-				})
-				.catch((error) => {
-					// Error
-					console.log(error);
-				}),
-                15000
-            )
-        }
-	});
+								},
+								description: desc,
+								timestamp: new Date(),
+							};
+							console.log(response);
+							return message.edit({ embeds: [embedAA] });
+						} else {
+							const embedAA = {
+								author: {
+									name: message.client.user.username,
+									icon_url: message.client.user.displayAvatarURL({
+										format: "png",
+										dynamic: true,
+									}),
+								},
+								color: 0x0099ff,
+								footer: {
+									text: message.guild.name,
+									icon_url: message.guild.iconURL({
+										format: "png",
+										dynamic: true,
+									}),
+								},
+								description: `**Scriptoria MC Server**\n\nNo players online!`,
+								timestamp: new Date(),
+							};
+							console.log(response);
+							return message.edit({ embeds: [embedAA] });
+						}
+					})
+					.catch((error) => {
+						// Error
+						console.log(error);
+					}),
+					15000
+				)
+			}
+		});
+	}
 }
 
 module.exports = mcstatus;
