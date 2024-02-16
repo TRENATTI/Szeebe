@@ -3,7 +3,7 @@ module.exports = {
     description: "N/A",
     args: true,
     argsOptional: true,
-	async execute(interaction, noblox, admin) {
+	async execute(interaction, noblox, admin, args) {
 
     }
 }
