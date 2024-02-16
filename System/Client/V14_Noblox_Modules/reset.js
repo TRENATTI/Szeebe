@@ -12,8 +12,12 @@ async function execSh(command) {
 	});
 }
 
-function reset() {
-	execSh("pm2 restart all")
+function reset(interaction) {
+	//execSh("pm2 restart all")
+	var db = admin.database();
+	db.ref("szeebe/alapha-universe-docs-ready").set(
+		true
+	);
 }
 
 module.exports = {
@@ -23,7 +27,7 @@ module.exports = {
 	subdata: {
 		cooldown: 15,
 	},
-	async execute(interaction) {
+	async execute(interaction, noblox, admin) {
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
@@ -31,9 +35,9 @@ module.exports = {
 		) {
 			interaction
 				.reply({
-					content: `Resetting...`,
+					content: `Resetting to Ready State!`,
 				})
-				.then(reset());
+				.then(reset(admin));
 		} else {
 			return interaction.reply({
 				content: `Sorry ${message.author}, but only the owners can run that command!`,
