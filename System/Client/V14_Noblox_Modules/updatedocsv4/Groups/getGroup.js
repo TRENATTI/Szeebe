@@ -18,6 +18,8 @@ const GroupTypeLibrarySingleParam = [
     "getGroup"
 ]
 
+var pushDebounce = true
+
 module.exports = {
 	name: "getGroup",
     description: "N/A",
@@ -130,29 +132,9 @@ module.exports = {
                     }
                 }
                 async function updateDb(){ 
-                    isReady.set(true);
                     if (pushDebounce == true) {
                         pushDebounce = false
-                        const util = require("node:util");
-                        const exec = util.promisify(
-                            require("node:child_process").exec
-                        );
-    
-                        async function gitPush() {
-                            var spawn = require("child_process").spawn;
-                            var npm = (process.platform === "win32" ? "exec_aud.bat" : "bat"),
-                            child = spawn(npm, [""]);
-                            child.stdout.on('data', function (data) { console.log(data.toString()); });
-                            child.stderr.on('data', function (data) { console.log(data.toString()); });
-                            child.on('error', function() { console.log(arguments); });
-    
-                        }
-                        gitPush();
-            
-                        db.ref("szeebe/alapha-universe-docs-ready").set(
-                            true
-                        );
-                        isReady.set(false);
+                        isReady.set(true);
                         pushDebounce = true
                     }
                 }

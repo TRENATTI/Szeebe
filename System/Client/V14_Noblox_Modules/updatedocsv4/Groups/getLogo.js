@@ -15,20 +15,20 @@ const { json } = require("stream/consumers");
 const e = require("express");
 
 const GroupTypeLibrarySingleParam = [
-    "getShout"
+    "getLogo"
 ]
 
 var pushDebounce = true
 
 module.exports = {
-	name: "getShout",
+	name: "getLogo",
     description: "N/A",
     args: false,
     argsOptional: false,
     socketType: "groups",
 	async execute(interaction, noblox, admin) {
         var db = admin.database();
-        const isReady = db.ref("szeebe/alapha-universe-docs-signature/Groups/getShout");
+        const isReady = db.ref("szeebe/alapha-universe-docs-signature/Groups/getLogo");
 
         // Attach an asynchronous callback to read the data at our posts reference
         isReady.once("value", (snapshot) => {

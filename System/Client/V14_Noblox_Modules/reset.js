@@ -12,13 +12,6 @@ async function execSh(command) {
 	});
 }
 
-function reset(interaction) {
-	//execSh("pm2 restart all")
-	var db = admin.database();
-	db.ref("szeebe/alapha-universe-docs-ready").set(
-		true
-	);
-}
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -28,6 +21,31 @@ module.exports = {
 		cooldown: 15,
 	},
 	async execute(interaction, noblox, admin) {
+		async function reset(interaction) {
+			//execSh("pm2 restart all")
+			var db = admin.database();
+			db.ref("szeebe/alapha-universe-docs-ready").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getGroup").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getGroupFunds").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getGroupGames").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getGroupSocialLinks").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getRoles").set(
+				true
+			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getShout").set(
+				true
+			);
+		}
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
