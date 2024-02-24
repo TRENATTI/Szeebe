@@ -73,7 +73,13 @@ module.exports = {
 				new ActionRowBuilder().addComponents(
 					snu_button
 				);
-			message.edit({ embeds: [ embedAA ], components: [ snu_actionrowbuilder ]} )
+
+			if (buttonValue == ''){
+				message.edit({ embeds: [ embedAA ]} )
+			} else {
+				message.edit({ embeds: [ embedAA ], components: [ snu_actionrowbuilder ]} )
+			}
+
 		}
 		if (
 			interaction.user.id == "170639211182030850" ||
