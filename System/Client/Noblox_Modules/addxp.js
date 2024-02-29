@@ -21,7 +21,8 @@ module.exports = {
 		if (
 			message.author.id == "170639211182030850" ||
 			message.author.id == "206090047462703104" ||
-			message.author.id == "463516784578789376"
+			message.author.id == "463516784578789376" || 
+			message.author.id == "1154775391597240391"
 		) {
 			isAuthorized();
 		} else {

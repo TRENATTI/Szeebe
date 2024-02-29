@@ -5,6 +5,7 @@ async function messages(client, noblox, currentUser, admin) {
 	var db = admin.database();
 	client.on("messageCreate", async (message) => {
 		if (message.author.bot) return;
+		if (process.env.DEVELOPER_MODE == "true") return;
 		var iter = 0;
 		var ref = db.ref("szeebe").child("aa-universe");
 		ref.limitToLast(10).on("value", (querySnapshot) => {

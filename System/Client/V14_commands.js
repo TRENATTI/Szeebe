@@ -167,30 +167,31 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 	//    .catch(console.error);
 
 	client.on("interactionCreate", async (interaction) => {
-		if (!interaction.isChatInputCommand()) return;
+		if (interaction.isChatInputCommand()) {
 
-		const command = client.v14_commands.get(interaction.commandName); //-- Discord.js V14 Tutorial
-		//const command = commands.get(interaction.commandName);
-		if (!command) return;
+			const command = client.v14_commands.get(interaction.commandName); //-- Discord.js V14 Tutorial
+			//const command = commands.get(interaction.commandName);
+			if (!command) return;
 
-		try {
-			await command.execute(interaction, noblox, admin);
-			console.log(
-				new Date(),
-				"| V14_commmands.js |",
-				`${interaction.user.username} [${interaction.user.id}] successfully ran an interaction! (${interaction.commandName})`
-			);
-		} catch (error) {
-			console.log(
-				new Date(),
-				"| V14_commmands.js |",
-				`${interaction.user.username} [${interaction.user.id}] failed to run an interaction! (${interaction.commandName})\nError:`,
-				error
-			);
-			await interaction.reply({
-				content: "There was an error while executing this command!",
-				ephemeral: true,
-			});
+			try {
+				await command.execute(interaction, noblox, admin);
+				console.log(
+					new Date(),
+					"| V14_commmands.js |",
+					`${interaction.user.username} [${interaction.user.id}] successfully ran an interaction! (${interaction.commandName})`
+				);
+			} catch (error) {
+				console.log(
+					new Date(),
+					"| V14_commmands.js |",
+					`${interaction.user.username} [${interaction.user.id}] failed to run an interaction! (${interaction.commandName})\nError:`,
+					error
+				);
+				await interaction.reply({
+					content: "There was an error while executing this command!",
+					ephemeral: true,
+				});
+			}
 		}
 	});
 }
