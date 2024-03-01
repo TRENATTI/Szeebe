@@ -45,6 +45,9 @@ module.exports = {
 			db.ref("szeebe/alapha-universe-docs-signature/Groups/getShout").set(
 				true
 			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getLogo").set(
+				true
+			);
 		}
 		if (
 			interaction.user.id == "170639211182030850" ||
