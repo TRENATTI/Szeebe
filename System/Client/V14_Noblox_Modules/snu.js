@@ -54,8 +54,8 @@ module.exports = {
 
 			const embedAA = {
 				"author": {
-					"name": message.author.username,
-					"icon_url": message.author.displayAvatarURL({ format: "png", dynamic: true })
+					"name": interaction.author.username,
+					"icon_url": interaction.author.displayAvatarURL({ format: "png", dynamic: true })
 				},
 				"footer": {
 					"text": message.guild.name,
