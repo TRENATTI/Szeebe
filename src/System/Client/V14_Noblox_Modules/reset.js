@@ -45,11 +45,15 @@ module.exports = {
 			db.ref("szeebe/alapha-universe-docs-signature/Groups/getShout").set(
 				true
 			);
+			db.ref("szeebe/alapha-universe-docs-signature/Groups/getLogo").set(
+				true
+			);
 		}
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
-			interaction.user.id == "206090047462703104"
+			interaction.user.id == "206090047462703104" || 
+			interaction.user.id == "1154775391597240391" 
 		) {
 			interaction
 				.reply({

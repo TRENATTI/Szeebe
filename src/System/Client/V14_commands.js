@@ -7,8 +7,8 @@ const { Routes } = require("discord.js"); // -- Discord V14
 
 //const moduleSystem = './System/Client/Modules'  // -- Discord.js V12
 //const moduleNobloxSystem = './System/Client/Noblox_Modules' // -- Discord.js V12
-const moduleSystem = "./System/Client/V14_Modules"; // -- Discord.js V14
-const moduleNobloxSystem = "./System/Client/V14_Noblox_Modules"; // -- Discord.js V14
+const moduleSystem = "./src/System/Client/V14_Modules"; // -- Discord.js V14
+const moduleNobloxSystem = "./src/System/Client/V14_Noblox_Modules"; // -- Discord.js V14
 //
 
 //const moduleFiles = fs.readdirSync(moduleSystem).filter(file => file.endsWith('.js'));  // -- Discord.js V12
@@ -192,6 +192,8 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 					ephemeral: true,
 				});
 			}
+		} else if (interaction.isButton()) {
+			
 		}
 	});
 }

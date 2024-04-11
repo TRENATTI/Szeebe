@@ -4,6 +4,7 @@ require("dotenv").config();
 
 function messages(client) {
 	client.on("messageCreate", (message) => {
+		console.log(message.content)
 		//if (message.guildid == 465248301504266241) return
 		if (message.author.bot) return;
 		if (message.content.toLowerCase() == "hi") {

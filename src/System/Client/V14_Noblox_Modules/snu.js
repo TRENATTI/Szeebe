@@ -54,8 +54,8 @@ module.exports = {
 
 			const embedAA = {
 				"author": {
-					"name": message.author.username,
-					"icon_url": message.author.displayAvatarURL({ format: "png", dynamic: true })
+					"name": interaction.author.username,
+					"icon_url": interaction.author.displayAvatarURL({ format: "png", dynamic: true })
 				},
 				"footer": {
 					"text": message.guild.name,
@@ -84,7 +84,8 @@ module.exports = {
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
-			interaction.user.id == "206090047462703104"
+			interaction.user.id == "206090047462703104" ||
+            interaction.user.id == "1154775391597240391"
 		) {
 			interaction
 				.reply({

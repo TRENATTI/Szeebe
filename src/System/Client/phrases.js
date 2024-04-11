@@ -4,7 +4,7 @@ const fs = require("fs");
 const { Collection } = require("discord.js");
 //
 
-const moduleSystem = "./System/Client/Phrases";
+const moduleSystem = "./src/System/Client/Phrases";
 
 //
 

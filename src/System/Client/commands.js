@@ -4,8 +4,8 @@ const { Collection } = require("discord.js");
 const env = require("dotenv");
 //
 
-const moduleSystem = "./System/Client/Modules";
-const moduleNobloxSystem = "./System/Client/Noblox_Modules";
+const moduleSystem = "./src/System/Client/Modules";
+const moduleNobloxSystem = "./src/System/Client/Noblox_Modules";
 
 //
 
