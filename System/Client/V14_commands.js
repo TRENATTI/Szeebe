@@ -192,6 +192,8 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 					ephemeral: true,
 				});
 			}
+		} else if (interaction.isButton()) {
+			
 		}
 	});
 }
