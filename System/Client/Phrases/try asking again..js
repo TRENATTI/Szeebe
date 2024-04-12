@@ -1,5 +1,5 @@
 module.exports = {
-	name: "nothing.",
+	name: "try asking again.",
 	aliases: [],
 	execute(message) {
 		return message.channel.send({
