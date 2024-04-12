@@ -2,6 +2,8 @@ require("dotenv").config();
 const { ComponentType } = require("discord.js")
 
 async function tickets(client, noblox, currentUser, admin, token, applicationid, prefix) {
+
+    
 	client.once("ready", async () => {
 
         const guild = await client.guilds.fetch(`1182652224040620052`);
@@ -28,4 +30,7 @@ async function tickets(client, noblox, currentUser, admin, token, applicationid,
 	});
 }
 
-module.exports = tickets;
+async function ex(){
+
+}
+module.exports = ex;
