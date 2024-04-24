@@ -18,7 +18,7 @@ module.exports = {
 				if (response.players.sample) {
 					console.log(true);
 					var dataratatata = []; // Yes the Pokemon
-					dataratatata.push(`**Scriptoria MC Server**\n`)
+					dataratatata.push(`**Scriptoria MC Server**\n`);
 					dataratatata.push(
 						`${response.players.online} player(s) online!\n`
 					);

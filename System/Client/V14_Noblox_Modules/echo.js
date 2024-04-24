@@ -1,21 +1,29 @@
-const { EmbedBuilder, SlashCommandBuilder, ButtonStyle, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const {
+	EmbedBuilder,
+	SlashCommandBuilder,
+	ButtonStyle,
+	ActionRowBuilder,
+	ButtonBuilder,
+} = require("discord.js");
 require("dotenv").config();
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("echo")
 		.setDescription("Admin internal command to world broadcast")
-		.addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('message')
-				.setDescription('Message to add.')
+				.setName("message")
+				.setDescription("Message to add.")
 				.setRequired(true)
 		),
 	subdata: {
 		cooldown: 15,
 	},
 	async execute(interaction, noblox, admin) {
-		const messageValue = eval('`' + interaction.options.getString(`message`) + '`')
+		const messageValue = eval(
+			"`" + interaction.options.getString(`message`) + "`"
+		);
 		async function isAuthorized() {
 			var db = admin.database();
 			const guilddata = [];
@@ -38,23 +46,33 @@ module.exports = {
 			for (let i = 0; i < guildData.length; i++) {
 				setTimeout(async function timer() {
 					try {
-						const guild = await interaction.client.guilds.fetch(guildData[i].childData.serverId);
-						const channel = await guild.channels.fetch(guildData[i].childData.channelId);
-							const embedAA = {
-								"author": {
-									"name": interaction.user.username,
-									"icon_url": interaction.user.displayAvatarURL({ format: "png", dynamic: true })
-								},
-								"footer": {
-									"text": interaction.guild.name,
-									"icon_url": interaction.guild.iconURL({ format: "png", dynamic: true })
-								},
-								"description": messageValue,
-								timestamp: new Date()
-							}
-							channel.send({ embeds: [ embedAA ]} )
+						const guild = await interaction.client.guilds.fetch(
+							guildData[i].childData.serverId
+						);
+						const channel = await guild.channels.fetch(
+							guildData[i].childData.channelId
+						);
+						const embedAA = {
+							author: {
+								name: interaction.user.username,
+								icon_url: interaction.user.displayAvatarURL({
+									format: "png",
+									dynamic: true,
+								}),
+							},
+							footer: {
+								text: interaction.guild.name,
+								icon_url: interaction.guild.iconURL({
+									format: "png",
+									dynamic: true,
+								}),
+							},
+							description: messageValue,
+							timestamp: new Date(),
+						};
+						channel.send({ embeds: [embedAA] });
 					} catch (error) {
-						console.log(error)
+						console.log(error);
 					}
 				});
 			}
@@ -62,8 +80,8 @@ module.exports = {
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
-			interaction.user.id == "206090047462703104" || 
-			interaction.user.id == "1154775391597240391" 
+			interaction.user.id == "206090047462703104" ||
+			interaction.user.id == "1154775391597240391"
 		) {
 			interaction.reply({
 				content: `Starting...`,
@@ -78,5 +96,5 @@ module.exports = {
 					message.delete({ timeout: 5000, reason: "delete" })
 				);
 		}
-	}
+	},
 };
