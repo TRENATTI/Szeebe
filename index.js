@@ -38,7 +38,7 @@ function getKeys(flags) {
 		if (flags == "token") {
 			return process.env.TOKEN;
 		} else if (flags == "rbxcookie") {
-			return process.env.TESTING_RBXCOOKIE;
+			return process.env.RBXCOOKIE;
 		} else if (flags == "applicationid") {
 			return process.env.APPLICATION_ID;
 		} else if (flags == "prefix") {
@@ -54,13 +54,13 @@ const rbxcookie = getKeys("rbxcookie");
 
 //
 
-async function startApp(currentUser, client, admin) {
+function startApp(currentUser, client, admin) {
 	const clientFiles = fs
 		.readdirSync(clientSystem)
 		.filter((file) => file.endsWith(".js"));
 
 	for (const file of clientFiles) {
-		const clientFile = require(clientSystem + "/" + file);
+		const clientFile = require(`./System/Client/${file}`);
 		clientFile(
 			client,
 			noblox,
@@ -135,3 +135,5 @@ async function startDiscord() {
 //
 
 startDiscord();
+
+//
