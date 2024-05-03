@@ -68,8 +68,8 @@ module.exports = {
 
 			const embedAA = {
 				author: {
-					name: interaction.author.username,
-					icon_url: interaction.author.displayAvatarURL({
+					name: interaction.user.username,
+					icon_url: interaction.user.displayAvatarURL({
 						format: "png",
 						dynamic: true,
 					}),
