@@ -11,9 +11,9 @@ async function tickets(
 	prefix
 ) {
 	client.once("ready", async () => {
-		const guild = await client.guilds.fetch(`1182652224040620052`);
-		const channel = await guild.channels.fetch("1182652602832408638");
-		const response = await channel.messages.fetch("1182655235345371251");
+		const guild = await client.guilds.fetch(`793960635628781618`);
+		const channel = await guild.channels.fetch("1235751537901568070");
+		const response = await channel.messages.fetch("1235757142506602526");
 
 		try {
 			//const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
@@ -27,7 +27,7 @@ async function tickets(
 				//const selection = i.values[0];
 				console.log(i);
 				//if (selection == "button") {
-				response.deferReply({
+				response.reply({
 					content: `Thanks for testing, this will be out shortly!`,
 					ephemeral: true,
 				});
@@ -40,5 +40,4 @@ async function tickets(
 	});
 }
 
-async function ex() {}
-module.exports = ex;
+module.exports = tickets;
