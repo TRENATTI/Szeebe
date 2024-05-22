@@ -93,8 +93,8 @@ module.exports = {
 				snu_button
 			);
 
-			if (buttonValue == "") {
-				message.edit({ embeds: [embedAA] });
+			if (buttonValue == "-") {
+				message.edit({ embeds: [embedAA], components: [] });
 			} else {
 				message.edit({
 					embeds: [embedAA],
