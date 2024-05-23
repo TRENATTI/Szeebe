@@ -21,7 +21,7 @@ module.exports = {
 		if (
 			message.author.id == "170639211182030850" ||
 			message.author.id == "206090047462703104" ||
-			message.author.id == "463516784578789376" || 
+			message.author.id == "463516784578789376" ||
 			message.author.id == "1154775391597240391"
 		) {
 			isAuthorized();
@@ -141,14 +141,12 @@ module.exports = {
 					}),
 				});
 
-			message
-				.reply({ embeds: [embed_startwork] })
-				.then((message) =>
-					message.delete({
-						timeout: userArray.length * 1000 + 1000,
-						reason: "delete working message",
-					})
-				);
+			message.reply({ embeds: [embed_startwork] }).then((message) =>
+				message.delete({
+					timeout: userArray.length * 1000 + 1000,
+					reason: "delete working message",
+				})
+			);
 
 			// all roles
 			//var roles;

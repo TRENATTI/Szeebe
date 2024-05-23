@@ -1,38 +1,44 @@
-const { EmbedBuilder, SlashCommandBuilder, ButtonStyle, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const {
+	EmbedBuilder,
+	SlashCommandBuilder,
+	ButtonStyle,
+	ActionRowBuilder,
+	ButtonBuilder,
+} = require("discord.js");
 require("dotenv").config();
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("snu")
 		.setDescription("Admin internal command  to update embeds")
-        .addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('messageid')
-				.setDescription('Message ID>')
+				.setName("messageid")
+				.setDescription("Message ID>")
 				.setRequired(true)
 		)
-		.addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('channelid')
-				.setDescription('Channel ID.')
+				.setName("channelid")
+				.setDescription("Channel ID.")
 				.setRequired(true)
 		)
-		.addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('serverid')
-				.setDescription('Server ID.')
+				.setName("serverid")
+				.setDescription("Server ID.")
 				.setRequired(true)
 		)
-		.addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('message')
-				.setDescription('Message to add.')
+				.setName("message")
+				.setDescription("Message to add.")
 				.setRequired(true)
 		)
-		.addStringOption(option =>
+		.addStringOption((option) =>
 			option
-				.setName('button')
-				.setDescription('Button Message to add.')
+				.setName("button")
+				.setDescription("Button Message to add.")
 				.setRequired(false)
 		),
 	subdata: {
@@ -41,50 +47,66 @@ module.exports = {
 	async execute(interaction, noblox, admin) {
 		var db = admin.database();
 		async function updateMsg(interaction) {
-			const targetMessage = interaction.options.getString('messageid');
-			const targetChannel = interaction.options.getString('channelid');
-			const targetServer = interaction.options.getString('serverid');
-			const buttonValue = interaction.options.getString('button');
-			const messageValue = eval('`' + interaction.options.getString(`message`) + '`')
-			
-			console.log(targetMessage, targetChannel, targetServer, messageValue, buttonValue)
+			const targetMessage = interaction.options.getString("messageid");
+			const targetChannel = interaction.options.getString("channelid");
+			const targetServer = interaction.options.getString("serverid");
+			const buttonValue = interaction.options.getString("button");
+			const messageValue = eval(
+				"`" + interaction.options.getString(`message`) + "`"
+			);
+
+			console.log(
+				targetMessage,
+				targetChannel,
+				targetServer,
+				messageValue,
+				buttonValue
+			);
 			const guild = await interaction.client.guilds.fetch(targetServer);
 			const channel = await guild.channels.fetch(targetChannel);
-			const message = await channel.messages.fetch(targetMessage)
+			const message = await channel.messages.fetch(targetMessage);
 
 			const embedAA = {
-				"author": {
-					"name": message.author.username,
-					"icon_url": message.author.displayAvatarURL({ format: "png", dynamic: true })
+				author: {
+					name: interaction.user.username,
+					icon_url: interaction.user.displayAvatarURL({
+						format: "png",
+						dynamic: true,
+					}),
 				},
-				"footer": {
-					"text": message.guild.name,
-					"icon_url": message.guild.iconURL({ format: "png", dynamic: true })
+				footer: {
+					text: message.guild.name,
+					icon_url: message.guild.iconURL({
+						format: "png",
+						dynamic: true,
+					}),
 				},
-				"description": messageValue,
-				timestamp: new Date()
-        	}
+				description: messageValue,
+				timestamp: new Date(),
+			};
 
 			const snu_button = new ButtonBuilder()
 				.setCustomId("button")
 				.setLabel(buttonValue || "")
 				.setStyle(ButtonStyle.Secondary);
-			const snu_actionrowbuilder =
-				new ActionRowBuilder().addComponents(
-					snu_button
-				);
+			const snu_actionrowbuilder = new ActionRowBuilder().addComponents(
+				snu_button
+			);
 
-			if (buttonValue == ''){
-				message.edit({ embeds: [ embedAA ]} )
+			if (buttonValue == "-") {
+				message.edit({ embeds: [embedAA], components: [] });
 			} else {
-				message.edit({ embeds: [ embedAA ], components: [ snu_actionrowbuilder ]} )
+				message.edit({
+					embeds: [embedAA],
+					components: [snu_actionrowbuilder],
+				});
 			}
-
 		}
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
-			interaction.user.id == "206090047462703104"
+			interaction.user.id == "206090047462703104" ||
+			interaction.user.id == "1154775391597240391"
 		) {
 			interaction
 				.reply({

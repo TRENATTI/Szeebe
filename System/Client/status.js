@@ -1,7 +1,15 @@
 require("dotenv").config();
 
 const { ActivityType } = require("discord.js"); // Discord.js V14
-function status(client, noblox, currentUser, admin, token, applicationid, prefix) {
+function status(
+	client,
+	noblox,
+	currentUser,
+	admin,
+	token,
+	applicationid,
+	prefix
+) {
 	client.once("ready", () => {
 		console.log(
 			new Date(),

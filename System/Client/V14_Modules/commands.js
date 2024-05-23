@@ -24,7 +24,7 @@ module.exports = {
 				"``"
 		);
 
-		data.push( `\nHere's a list of my slash commands!`);
+		data.push(`\nHere's a list of my slash commands!`);
 		data.push(
 			"``" +
 				v14_commands
@@ -33,7 +33,7 @@ module.exports = {
 					.join("``, ``") +
 				"``"
 		);
-		data.push( `\nHere's a list of my phrases!`);
+		data.push(`\nHere's a list of my phrases!`);
 		data.push(
 			"``" +
 				phrase_commands

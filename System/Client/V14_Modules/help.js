@@ -10,7 +10,7 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const embedAA = {
-			title: "Szeebe Here! >:3",
+			title: "Vlale Here! >:3",
 			author: {
 				name: interaction.client.user.username,
 				icon_url: interaction.client.user.displayAvatarURL({

@@ -17,11 +17,12 @@ module.exports = {
 		.setName("updatedocsv2")
 		.setDescription(`Admin internal command. Updates docs.`),
 	async execute(interaction, noblox, admin) {
-        var db = admin.database();
+		var db = admin.database();
 		if (
 			interaction.user.id == "170639211182030850" ||
 			interaction.user.id == "463516784578789376" ||
-			interaction.user.id == "206090047462703104"
+			interaction.user.id == "206090047462703104" ||
+			interaction.user.id == "1154775391597240391"
 		) {
 			interaction.reply({
 				content: `Starting...`,
@@ -81,62 +82,57 @@ module.exports = {
 						);
 					}
 					async function getGroupGithub(groupInfo) {
-
-                        try {
-                            const res = await axios.get(
-                                `https://raw.githack.com/Alpha-Authority/alapha-universe-docs/main/Docs/Groups/${userData[i].childKey}/getGroup.json`
-                            )
-                            if (res.data == null) {
-                                continueGroupData(false, "", groupInfo)
-                            } else {
-                                console.log(res.data)
-                                continueGroupData(true, res, groupInfo)
-                            }
-                        } catch (error) {
-                            const res = ""
-                            continueGroupData(false, res, groupInfo)
-                        }
-                    }
-                    async function continueGroupData(Flag, res, groupInfoCont){
-                        if (Flag == true) {
-                            var newdatastring = JSON.stringify(res.data);
-                            var newdatajson = JSON.parse(newdatastring);
-                            var newdatajsonstring = JSON.stringify(newdatajson);
-                            const file = fs.writeFileSync(
-                                `../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
-                                newdatajsonstring,
-                                "utf8"
-                            )
-                            const datafile2 = require(`../../../../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`);
-						    var str = JSON.stringify(datafile2);
-						    var strgD = JSON.stringify(groupInfoCont);
-                            console.log(str != strgD)
-							if (str != strgD) {
-                                const file2 = fs.writeFileSync(
-                                    `../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
-                                    strgD,
-                                    "utf8"
-                                );
-
+						try {
+							const res = await axios.get(
+								`https://raw.githack.com/Alpha-Authority/alapha-universe-docs/main/Docs/Groups/${userData[i].childKey}/getGroup.json`
+							);
+							if (res.data == null) {
+								continueGroupData(false, "", groupInfo);
 							} else {
-								console.log(false)
+								console.log(res.data);
+								continueGroupData(true, res, groupInfo);
 							}
-
-                        } else {
-                            var strgD = JSON.stringify(groupInfoCont);
-                            const file2 = fs.writeFile(
-                                `../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
-                                strgD, 
-                                function(err) {
-
-                                    console.log(err);
-                                    
-                                }
-                            );
-                        }
-                        updateDocs()
-                    }
-                    async function updateDocs(){ 
+						} catch (error) {
+							const res = "";
+							continueGroupData(false, res, groupInfo);
+						}
+					}
+					async function continueGroupData(Flag, res, groupInfoCont) {
+						if (Flag == true) {
+							var newdatastring = JSON.stringify(res.data);
+							var newdatajson = JSON.parse(newdatastring);
+							var newdatajsonstring = JSON.stringify(newdatajson);
+							const file = fs.writeFileSync(
+								`../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
+								newdatajsonstring,
+								"utf8"
+							);
+							const datafile2 = require(`../../../../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`);
+							var str = JSON.stringify(datafile2);
+							var strgD = JSON.stringify(groupInfoCont);
+							console.log(str != strgD);
+							if (str != strgD) {
+								const file2 = fs.writeFileSync(
+									`../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
+									strgD,
+									"utf8"
+								);
+							} else {
+								console.log(false);
+							}
+						} else {
+							var strgD = JSON.stringify(groupInfoCont);
+							const file2 = fs.writeFile(
+								`../alapha-universe-docs/Docs/Groups/${userData[i].childKey}/getGroup.json`,
+								strgD,
+								function (err) {
+									console.log(err);
+								}
+							);
+						}
+						updateDocs();
+					}
+					async function updateDocs() {
 						if (i == userData.length - 1) {
 							const util = require("node:util");
 							const exec = util.promisify(
@@ -145,15 +141,23 @@ module.exports = {
 
 							async function gitPush() {
 								var spawn = require("child_process").spawn;
-                                var npm = (process.platform === "win32" ? "exec_aud.bat" : "bat"),
-                                child = spawn(npm, [""]);
-                                child.stdout.on('data', function (data) { console.log(data.toString()); });
-                                child.stderr.on('data', function (data) { console.log(data.toString()); });
-                                child.on('error', function() { console.log(arguments); });
-
+								var npm =
+										process.platform === "win32"
+											? "exec_aud.bat"
+											: "bat",
+									child = spawn(npm, [""]);
+								child.stdout.on("data", function (data) {
+									console.log(data.toString());
+								});
+								child.stderr.on("data", function (data) {
+									console.log(data.toString());
+								});
+								child.on("error", function () {
+									console.log(arguments);
+								});
 							}
 							gitPush();
-				
+
 							db.ref("szeebe/alapha-universe-docs-ready").set(
 								true
 							);

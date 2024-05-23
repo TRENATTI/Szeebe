@@ -24,7 +24,15 @@ const moduleNobloxFiles = fs
 
 //console.log(test([{Type: 'embed', Data: 'yes'},{Type: 'actionrowbuilder', Data: [{type: 2, components: [{type: 1, label: 'yes', style: 1, custom_id: '5'}]}]}]))
 
-function commands(client, noblox, currentUser, admin, token, applicationid, prefix) {
+function commands(
+	client,
+	noblox,
+	currentUser,
+	admin,
+	token,
+	applicationid,
+	prefix
+) {
 	//client.commands = new Discord.Collection() -- Discord.js V12
 	client.v14_commands = new Collection(); //-- Discord.js V14
 	const commands = [];
@@ -168,7 +176,6 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 
 	client.on("interactionCreate", async (interaction) => {
 		if (interaction.isChatInputCommand()) {
-
 			const command = client.v14_commands.get(interaction.commandName); //-- Discord.js V14 Tutorial
 			//const command = commands.get(interaction.commandName);
 			if (!command) return;
@@ -192,6 +199,7 @@ function commands(client, noblox, currentUser, admin, token, applicationid, pref
 					ephemeral: true,
 				});
 			}
+		} else if (interaction.isButton()) {
 		}
 	});
 }

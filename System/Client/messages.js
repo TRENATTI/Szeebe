@@ -5,6 +5,13 @@ require("dotenv").config();
 function messages(client) {
 	client.on("messageCreate", (message) => {
 		//if (message.guildid == 465248301504266241) return
+		if (!message.author.id == 206090047462703104) return;
+		if (message.content.toLowerCase().indexOf("vaktovia") != -1) {
+			message.delete();
+		}
+		if (message.content.toLowerCase().indexOf("glory") != -1) {
+			message.delete();
+		}
 		if (message.author.bot) return;
 		if (message.content.toLowerCase() == "hi") {
 			//message.channel.send('hello there <@' + message.author.id + '>')

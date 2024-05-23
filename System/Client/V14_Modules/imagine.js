@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js")
+const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("imagine")
@@ -10,9 +10,7 @@ module.exports = {
 				.setRequired(true)
 		)
 		.addStringOption((option) =>
-			option.setName("order")
-            .setDescription("66.")
-            .setRequired(true)
+			option.setName("order").setDescription("66.").setRequired(true)
 		)
 		.setDefaultMemberPermissions(0),
 	subdata: {
@@ -33,14 +31,14 @@ module.exports = {
 		) {
 			interaction.reply({
 				content: `Starting...`,
-                ephemeral: true
+				ephemeral: true,
 			});
 			isAuthorized();
 		} else {
 			return interaction
 				.reply({
 					content: `Sorry ${interaction.author}, but only the bot owners can run that command!`,
-                    ephemeral: true
+					ephemeral: true,
 				})
 				.then((message) =>
 					message.delete({ timeout: 5000, reason: "delete" })
@@ -48,7 +46,7 @@ module.exports = {
 		}
 
 		async function isAuthorized() {
-			if (arg1== "v12") {
+			if (arg1 == "v12") {
 				Order(1);
 			} else if (arg1.toLowerCase() == "v14") {
 				Order(2);
@@ -90,7 +88,13 @@ module.exports = {
 
 			if (command.noblox) {
 				try {
-					command.execute(interaction, args, interaction.client, noblox, admin);
+					command.execute(
+						interaction,
+						args,
+						interaction.client,
+						noblox,
+						admin
+					);
 					console.log(
 						new Date(),
 						"| commmands.js |",
@@ -117,9 +121,10 @@ module.exports = {
 					);
 				} catch (error) {
 					interaction.reply({
-						content: "There was an error while executing this command!",
-                        ephemeral: true,
-                    });
+						content:
+							"There was an error while executing this command!",
+						ephemeral: true,
+					});
 					console.log(
 						new Date(),
 						"| commmands.js |",
@@ -128,48 +133,47 @@ module.exports = {
 					);
 				}
 			}
-        }
-        async function v14() {
-            const command = interaction.client.v14_commands.get(arg2);
-            if (!command) return;
+		}
+		async function v14() {
+			const command = interaction.client.v14_commands.get(arg2);
+			if (!command) return;
 
-            try {
-                await command.execute(interaction, noblox, admin);
-                console.log(
-                    new Date(),
-                    "| V14_commmands.js |",
-                    `${interaction.user.username} [${interaction.user.id}] successfully ran an interaction! (${interaction.commandName})`
-                );
-            } catch (error) {
-                console.log(
-                    new Date(),
-                    "| V14_commmands.js |",
-                    `${interaction.user.username} [${interaction.user.id}] failed to run an interaction! (${interaction.commandName})\nError:`,
-                    error
-                );
-                await interaction.reply({
-                    content:
-                        "There was an error while executing this command!",
-                    ephemeral: true,
-                });
-            }
-        }
-        async function phrases() {
-            const phrase =
-                interaction.client.phrases_v12.get(arg2) ||
-                interaction.client.phrases_v12.find(
-                    (phs) => phs.aliases && phs.aliases.includes(arg2)
-                );
+			try {
+				await command.execute(interaction, noblox, admin);
+				console.log(
+					new Date(),
+					"| V14_commmands.js |",
+					`${interaction.user.username} [${interaction.user.id}] successfully ran an interaction! (${interaction.commandName})`
+				);
+			} catch (error) {
+				console.log(
+					new Date(),
+					"| V14_commmands.js |",
+					`${interaction.user.username} [${interaction.user.id}] failed to run an interaction! (${interaction.commandName})\nError:`,
+					error
+				);
+				await interaction.reply({
+					content: "There was an error while executing this command!",
+					ephemeral: true,
+				});
+			}
+		}
+		async function phrases() {
+			const phrase =
+				interaction.client.phrases_v12.get(arg2) ||
+				interaction.client.phrases_v12.find(
+					(phs) => phs.aliases && phs.aliases.includes(arg2)
+				);
 
-            try {
-                phrase.execute(interaction);
-            } catch {
-                interaction.reply({
-                    content: "Unavailable phrase!",
-                    ephemeral: true,
-                });
-                console.log("Failed!");
-            }
-        }
+			try {
+				phrase.execute(interaction);
+			} catch {
+				interaction.reply({
+					content: "Unavailable phrase!",
+					ephemeral: true,
+				});
+				console.log("Failed!");
+			}
+		}
 	},
 };
