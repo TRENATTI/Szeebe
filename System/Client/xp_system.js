@@ -67,7 +67,6 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 								index,
 								arr
 							);
-							start();
 						} else {
 							current_xp = 0;
 							flag = true;
