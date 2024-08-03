@@ -1,5 +1,3 @@
-// By ScriptIntelligence
-
 // Structure Setup
 
 // node_modules
@@ -122,6 +120,7 @@ async function startDiscord() {
 			GatewayIntentBits.GuildMessages,
 			GatewayIntentBits.MessageContent,
 			GatewayIntentBits.GuildMembers,
+			GatewayIntentBits.GuildVoiceStates
 		],
 	});
 

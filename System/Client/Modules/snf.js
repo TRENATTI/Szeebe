@@ -24,6 +24,6 @@ module.exports = {
 			},
 			timestamp: new Date(),
 		};
-		return message.reply({ embeds: [embedAA] });
+		return message.channel.send({ embeds: [embedAA] });
 	},
 };

@@ -68,7 +68,7 @@ module.exports = {
 								}),
 							},
 							image: {
-								url: messageValue,
+								url: interaction.options.getString(`message`),
 							},
 							timestamp: new Date(),
 						};
