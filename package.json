@@ -19,7 +19,7 @@
     "firebase-admin": "^11.10.1",
     "fs": "^0.0.1-security",
     "minecraft-status": "^1.1.0",
-    "noblox.js": "^4.14.1",
+    "noblox.js": "^6.0.2",
     "nodejs": "file:",
     "querystring": "^0.2.1"
   }
