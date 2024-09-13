@@ -70,9 +70,9 @@ function commands(
 					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
 				);
 			} catch (error) {
-				message.reply(
-					"There was an error while executing this command!"
-				);
+				//message.reply(
+				//	"There was an error while executing this command!"
+				//);
 				console.log(
 					new Date(),
 					"| commmands.js |",
@@ -89,9 +89,9 @@ function commands(
 					`${message.author.tag} [${message.author.id}] successfully ran an message command! (${commandName})`
 				);
 			} catch (error) {
-				message.reply(
-					"There was an error while executing this command!"
-				);
+				//message.reply(
+				//	"There was an error while executing this command!"
+				//);
 				console.log(
 					new Date(),
 					"| commmands.js |",
