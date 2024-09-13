@@ -36,7 +36,7 @@ function commands(client) {
 					try {
 						p.execute(message);
 					} catch {
-						message.reply("Unavailable phrase!");
+						//message.reply("Unavailable phrase!");
 						console.log("Failed!");
 					}
 				}
@@ -59,7 +59,7 @@ function commands(client) {
 			try {
 				phrase.execute(message);
 			} catch {
-				message.reply("Unavailable phrase!");
+				//message.reply("Unavailable phrase!");
 				console.log("Failed!");
 			}
 		}
