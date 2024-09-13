@@ -4,7 +4,7 @@ module.exports = {
 	wildcard: true,
 	execute(message) {
 		return message.channel.send(
-			"https://media.discordapp.net/attachments/632070496594165790/1129917052094791702/they_bug.gif"
+			"https://tenor.com/view/half-life1-half-life-half-life2-who-up-playing-with-they-bug-who-up-playing-with-they-worm-gif-27606681"
 		);
 	},
 };
