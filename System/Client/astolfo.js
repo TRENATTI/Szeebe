@@ -20,7 +20,7 @@ function astolfo(client) {
       }**! We are glad to see you here, Now you are officially part **of Alpha Authority**\n\nPlease read the #info-and-rules and also get some nice roles from #self-roles. **And don't forget to say hi!**\n\n**Account created on** <t:${Math.round(
         member.user.createdTimestamp / 1000
       )}:f>`,
-      timestamp: Date.now(),
+      timestamp: new Date(),
       author: {
         name: "",
       },
