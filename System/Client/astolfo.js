@@ -36,7 +36,7 @@ function astolfo(client) {
       fields: [],
     };
     member.guild.channels.cache
-      .get("7105911521134510888")
+      .get("710591152113451088")
       .send({ embeds: [embedX] });
   });
 }
