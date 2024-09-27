@@ -35,10 +35,14 @@ function astolfo(client) {
       },
       fields: [],
     };
-    member.guild.channels.cache
+    try {
+      member.guild.channels.cache
       .get("710591152113451088")
-      .send({ content: `<@${member.id}>`,embeds: [embedX] });
-  });
+      .send({ content: `<@${member.id}>`,embeds: [embedX] })
+    } catch (err) {
+      console.log(err)
+    }
+  })
 }
 
 module.exports = astolfo;
