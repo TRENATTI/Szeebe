@@ -10,12 +10,10 @@ async function messages(client, noblox, currentUser, admin) {
 		var ref = db.ref("szeebe").child("aa-universe");
 		ref.limitToLast(10).on("value", (querySnapshot) => {
 			querySnapshot.forEach((querySnapshot2) => {
-				console.log(querySnapshot2.key, querySnapshot2.val());
+				console.log(new Date.now(), '| aa-universe.js | ', querySnapshot2.key, querySnapshot2.val());
 				querySnapshot2.forEach((thisObject) => {
 					if (message.guild.id == thisObject.val().serverId) {
-						console.log(true);
 						if (message.channel.id == thisObject.val().channelId) {
-							console.log(true);
 							sendData(querySnapshot, thisObject.val().serverId);
 						}
 					}
@@ -24,25 +22,24 @@ async function messages(client, noblox, currentUser, admin) {
 		});
 		async function sendData(querySnapshot, theServerId) {
 			querySnapshot.forEach((querySnapshot2) => {
-				console.log(querySnapshot2.key, querySnapshot2.val());
+				console.log(new Date.now(), '| aa-universe.js | ', querySnapshot2.key, querySnapshot2.val());
 				querySnapshot2.forEach((data) => {
-					console.log(data.val().serverId);
+					console.log(new Date.now(), '| aa-universe.js | ', data.val().serverId);
 					var guildId = data.val().serverId.toString();
-					console.log(guildId);
+					console.log(new Date.now(), '| aa-universe.js | ', guildId);
 					sendFLIPPINGDATA(guildId, data, theServerId);
 				});
 			});
 		}
 		async function sendFLIPPINGDATA(guildId, data, theServerId) {
 			const guild = await client.guilds.fetch(`${data.val().serverId}`);
-			console.log(guild);
 			if (guild.id != message.guild.id) {
-				console.log(guild.id);
 				const channel = await guild.channels.fetch(
 					data.val().channelId
 				);
-				console.log(channel.id);
+				console.log(new Date.now(), '| aa-universe.js | ', channel.id, `acquired.`);
 				const members = await message.guild.members.fetch();
+				console.log(new Date.now(), '| aa-universe.js | ', `members acquired.`);
 				const embed = new EmbedBuilder()
 					.setColor(16747520)
 					.setAuthor({
@@ -74,19 +71,19 @@ async function messages(client, noblox, currentUser, admin) {
 					.limitToLast(10)
 					.on("value", (querySnapshot) => {
 						querySnapshot.forEach((querySnapshot2) => {
-							console.log(
+							console.log(new Date.now(), '| aa-universe.js | ',
 								querySnapshot2.key,
 								querySnapshot2.val()
 							);
 							querySnapshot2.forEach((thisObject) => {
 								iter = iter + 1;
-								console.log(iter);
+								console.log(new Date.now(), '| aa-universe.js | ', `iteration:`, iter);
 								const thisObjectNew = [];
 								thisObjectNew.push(thisObject.key);
 								thisObjectNew.push(thisObject.val());
-								console.log(thisObjectNew);
+								console.log(new Date.now(), '| aa-universe.js | ', thisObjectNew);
 								messages.push(thisObjectNew);
-								console.log(thisObject.key, thisObject.val());
+								console.log(new Date.now(), '| aa-universe.js | ', thisObject.key, thisObject.val());
 								if (iter == 10) {
 									//gamerefit(iter, messages, channel, guild, thisObject, game_ref)
 								}
@@ -102,7 +99,7 @@ async function messages(client, noblox, currentUser, admin) {
 				thisObject,
 				game_ref
 			) {
-				console.log("DID");
+				console.log(new Date.now(), '| aa-universe.js | ', `DID`);
 				const isReady = db.ref("szeebe/aa-universe-messages-ready");
 
 				// Attach an asynchronous callback to read the data at our posts reference

@@ -25,17 +25,20 @@ async function tickets(
 			collector.on("collect", async (i) => {
 				//response.deferReply()
 				//const selection = i.values[0];
-				console.log(i);
+				console.log(new Date(),
+				`| tickets.js |`, i);
 				//if (selection == "button") {
 				response.reply({
 					content: `Thanks for testing, this will be out shortly!`,
 					ephemeral: true,
 				});
-				console.log("True!");
+				console.log(new Date(),
+				`| tickets.js |`, `True!`);
 				//}
 			});
 		} catch (error) {
-			console.log(error);
+			console.log(new Date(),
+				`| tickets.js |`, error);
 		}
 	});
 }

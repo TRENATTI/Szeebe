@@ -13,7 +13,7 @@ function status(
 	client.once("ready", () => {
 		console.log(
 			new Date(),
-			`| status.js | I'm in! Username: ${client.user.username}. User ID: ${client.user.id}`
+			`| status.js |`, `I'm in! Username: ${client.user.username}. User ID: ${client.user.id}`
 		);
 		//client.user.setActivity('\"' + prefix + '\"', {type: "LISTENING"});
 		const activities = [

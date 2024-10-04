@@ -40,7 +40,7 @@ function astolfo(client) {
       .get("710591152113451088")
       .send({ content: `<@${member.id}>`,embeds: [embedX] })
     } catch (err) {
-      console.log(err)
+      console.log(new Date.now(), '| astolfo.js | ', err)
     }
   })
 }

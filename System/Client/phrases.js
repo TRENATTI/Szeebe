@@ -37,7 +37,7 @@ function commands(client) {
 						p.execute(message);
 					} catch {
 						//message.reply("Unavailable phrase!");
-						console.log("Failed!");
+						console.log(new Date.now(), '| phrases.js |', "Failed!");
 					}
 				}
 			}); //p.name).sort().join(",")
@@ -60,7 +60,7 @@ function commands(client) {
 				phrase.execute(message);
 			} catch {
 				//message.reply("Unavailable phrase!");
-				console.log("Failed!");
+				console.log(new Date.now(), '| phrases.js |', `Failed!`);
 			}
 		}
 	});
