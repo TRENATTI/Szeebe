@@ -14,6 +14,7 @@ const fs = require("fs");
 const { Client, GatewayIntentBits } = require("discord.js");
 const noblox = require("noblox.js");
 const admin = require("firebase-admin");
+const log = require('custom-logger').config({ format: "%event% %padding%[%timestamp%]: %message%" }); // https://www.npmjs.com/package/custom-logger
 
 // // //
 
@@ -101,7 +102,7 @@ async function startNoblox(client) {
 	// You MUST call setCookie() before using any authenticated methods [marked by 🔐]
 	// Replace the parameter in setCookie() with your .ROBLOSECURITY cookie.
 	const currentUser = await noblox.setCookie(`${rbxcookie}`);
-	console.log(
+	log.info(
 		new Date(),
 		`| index.js |`,
 		`Logged in as ${currentUser.UserName} [${currentUser.UserID}]`
