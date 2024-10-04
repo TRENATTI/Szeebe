@@ -14,7 +14,7 @@ const fs = require("fs");
 const { Client, GatewayIntentBits } = require("discord.js");
 const noblox = require("noblox.js");
 const admin = require("firebase-admin");
-const log = require('custom-logger').config({ format: "%event% %padding%[%timestamp%]: %message%" }); // https://www.npmjs.com/package/custom-logger
+const log = require('custom-logger').config({ format: "%event% %padding%[%timestamp%]: %message%", timestamp: "isoDateTime" }); // https://www.npmjs.com/package/custom-logger
 
 // // //
 
