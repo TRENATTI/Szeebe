@@ -53,7 +53,7 @@ async function messages(client, noblox, currentUser, admin) {
 					.setTimestamp()
 					.setFooter({
 						text:
-							`AA Universe | ` +
+							`Alapha Universe | ` +
 							message.guild.name +
 							` | ` +
 							members.size +
