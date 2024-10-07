@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+const { format } = require("path");
 require("dotenv").config();
 const { stringify } = require("querystring");
 async function CCS(client, noblox, currentUser, admin) {
@@ -41,15 +42,34 @@ async function CCS(client, noblox, currentUser, admin) {
 				const members = await message.guild.members.fetch();
 				console.log(new Date(), '| aa-universe.js | ', `members acquired.`);
 				if (message.content.length < 1) return;
-				const embed = new EmbedBuilder()
-					.setColor(16747520)
-					.setAuthor({
+				if (message.content.startsWith(`https://tenor.com`)) 
+				{ 
+                const embed = new EmbedBuilder()
+				    .setAuthor({
 						name: message.author.username,
 						iconURL: message.author.displayAvatarURL({
 							format: "png",
 							dynamic: true,
-						}),
+						})
 					})
+					.setTimestamp()
+					.setFooter({
+						text:
+						`Alapha Universe | ${message.guild.name} | ${message.guild.size} Server Members`,
+						iconURL: message.guild.iconURL({
+							format: "png",
+							dynamic: "true"
+						})
+					})
+					.setImage(``)
+
+				} else {
+				const embed = new EmbedBuilder()
+					.setColor(16747520)
+					.setAuthor({
+						name: message.author.username,
+					})
+					.setThumbnail(message.author.displayAvatarURL({format: "png", dynamic: true}))
 					.setDescription(message.content)
 					.setTimestamp()
 					.setFooter({
@@ -65,6 +85,7 @@ async function CCS(client, noblox, currentUser, admin) {
 						}),
 					});
 				channel.send({ embeds: [embed] });
+				}
 				const messages = [];
 				const game_ref = db.ref("szeebe").child("aa-universe-messages");
 				game_ref
