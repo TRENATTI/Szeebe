@@ -2,7 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const Discord = require("discord.js");
 
-function astolfo(client) {
+function WS(client) {
   let i = 0;
   const photos = [
     "https://cdn.discordapp.com/attachments/809592756946206751/1001874995577892974/welcomegayhaha.gif",
@@ -45,4 +45,4 @@ function astolfo(client) {
   })
 }
 
-module.exports = astolfo;
+module.exports = WS;
