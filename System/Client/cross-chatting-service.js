@@ -40,6 +40,7 @@ async function messages(client, noblox, currentUser, admin) {
 				console.log(new Date(), '| aa-universe.js | ', channel.id, `acquired.`);
 				const members = await message.guild.members.fetch();
 				console.log(new Date(), '| aa-universe.js | ', `members acquired.`);
+				if (message.content.length < 1) return;
 				const embed = new EmbedBuilder()
 					.setColor(16747520)
 					.setAuthor({
