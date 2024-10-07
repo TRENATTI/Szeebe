@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 const { stringify } = require("querystring");
-async function messages(client, noblox, currentUser, admin) {
+async function CCS(client, noblox, currentUser, admin) {
 	var db = admin.database();
 	client.on("messageCreate", async (message) => {
 		if (message.author.bot) return;
@@ -14,24 +14,24 @@ async function messages(client, noblox, currentUser, admin) {
 				querySnapshot2.forEach((thisObject) => {
 					if (message.guild.id == thisObject.val().serverId) {
 						if (message.channel.id == thisObject.val().channelId) {
-							sendData(querySnapshot, thisObject.val().serverId);
+							convertData(querySnapshot, thisObject.val().serverId);
 						}
 					}
 				});
 			});
 		});
-		async function sendData(querySnapshot, theServerId) {
+		async function convertData(querySnapshot, theServerId) {
 			querySnapshot.forEach((querySnapshot2) => {
 				console.log(new Date(), '| aa-universe.js | ', querySnapshot2.key, querySnapshot2.val());
 				querySnapshot2.forEach((data) => {
 					console.log(new Date(), '| aa-universe.js | ', data.val().serverId);
 					var guildId = data.val().serverId.toString();
 					console.log(new Date(), '| aa-universe.js | ', guildId);
-					sendFLIPPINGDATA(guildId, data, theServerId);
+					createMessage(guildId, data, theServerId);
 				});
 			});
 		}
-		async function sendFLIPPINGDATA(guildId, data, theServerId) {
+		async function createMessage(guildId, data, theServerId) {
 			const guild = await client.guilds.fetch(`${data.val().serverId}`);
 			if (guild.id != message.guild.id) {
 				const channel = await guild.channels.fetch(
@@ -86,13 +86,13 @@ async function messages(client, noblox, currentUser, admin) {
 								messages.push(thisObjectNew);
 								console.log(new Date(), '| aa-universe.js | ', thisObject.key, thisObject.val());
 								if (iter == 10) {
-									//gamerefit(iter, messages, channel, guild, thisObject, game_ref)
+									//syncGameData(iter, messages, channel, guild, thisObject, game_ref)
 								}
 							});
 						});
 					});
 			}
-			async function gamerefit(
+			async function syncGameData(
 				iter,
 				messages,
 				channel,
@@ -138,4 +138,4 @@ async function messages(client, noblox, currentUser, admin) {
 	});
 }
 
-module.exports = messages;
+module.exports = CCS;
