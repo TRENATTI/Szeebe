@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { ComponentType } = require("discord.js");
 
-async function tickets(
+async function TS(
 	client,
 	noblox,
 	currentUser,
@@ -43,4 +43,4 @@ async function tickets(
 	});
 }
 
-module.exports = tickets;
+module.exports = TS;
