@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { ActivityType } = require("discord.js"); // Discord.js V14
-function status(
+function PS(
 	client,
 	noblox,
 	currentUser,
@@ -45,4 +45,4 @@ function status(
 	});
 }
 
-module.exports = status;
+module.exports = PS;
