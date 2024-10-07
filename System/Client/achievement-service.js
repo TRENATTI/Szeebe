@@ -2,7 +2,7 @@ require("dotenv").config();
 let timeData = [];
 let messageTimeData = [];
 const insane = true;
-function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
+function AS(client, noblox, currentUser, admin, token, applicationid, prefix) {
 	console.log(new Date(),`| xp_system.js |`, `XP System online`);
 	client.on("messageCreate", (message) => {
 		let db = admin.database();
@@ -40,9 +40,9 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 			newStateChannelId == null &&
 			oldStateGuild == "215221157937283075"
 		) {
-			timeData.forEach(startCalc);
+			timeData.forEach(calcuateUserVCTime);
 
-			function startCalc(item, index, arr) {
+			function calcuateUserVCTime(item, index, arr) {
 				if (arr[index][0] == oldState.member.user.id) {
 					let seconds = Date.now() - arr[index][1];
 					let minutes = seconds / 60000;
@@ -58,7 +58,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 						if (snapshot.val()) {
 							current_xp = Number(snapshot.val().xp);
 							console.log(new Date(),`| xp_system.js |`, current_xp);
-							flagit(
+							addVCTimeToUserProfile(
 								false,
 								current_xp,
 								toaddXP,
@@ -70,7 +70,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 						} else {
 							current_xp = 0;
 							flag = true;
-							flagit(
+							addVCTimeToUserProfile(
 								true,
 								current_xp,
 								toaddXP,
@@ -83,7 +83,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 					});
 				}
 			}
-			function flagit(
+			function addVCTimeToUserProfile(
 				flag,
 				current_points,
 				toaddXP,
@@ -101,7 +101,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 						xp: Number(new_total_points),
 					});
 					timeData.splice(index, 1);
-					getInsane(new_total_points, toaddXP, flooredMinutes);
+					createUserVCTimeMessages(new_total_points, toaddXP, flooredMinutes);
 				} else {
 					db.ref(
 						`points/groups/SB/users/${oldState.member.user.id}`
@@ -109,7 +109,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 						xp: Number(new_total_points),
 					});
 					timeData.splice(index, 1);
-					getInsane(new_total_points, toaddXP, flooredMinutes);
+					createUserVCTimeMessages(new_total_points, toaddXP, flooredMinutes);
 				}
 			}
 		}
@@ -120,7 +120,7 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 		) {
 			console.log(new Date(),`| xp_system.js |`, false);
 		}
-		function getInsane(new_total_points, toaddXP, flooredMinutes) {
+		function createUserVCTimeMessages(new_total_points, toaddXP, flooredMinutes) {
 			let guild = oldState.guild;
 			oldState.guild.channels
 				.fetch("578402807971971102")
@@ -166,4 +166,4 @@ function vc(client, noblox, currentUser, admin, token, applicationid, prefix) {
 	});
 }
 
-module.exports = vc;
+module.exports = AS;
