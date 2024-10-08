@@ -9,6 +9,8 @@ async function CCS(client, noblox, currentUser, admin) {
 		if (process.env.DEVELOPER_MODE == "true") return;
 		var iter = 0;
 		var ref = db.ref("szeebe").child("aa-universe");
+		try {
+
 		ref.limitToLast(10).on("value", (querySnapshot) => {
 			querySnapshot.forEach((querySnapshot2) => {
 				console.log(new Date(), '| aa-universe.js | ', querySnapshot2.key, querySnapshot2.val());
@@ -77,7 +79,6 @@ async function CCS(client, noblox, currentUser, admin) {
 							dynamic: "true"
 						})
 					})
-					.setDescription("Tenor Embed testing, patching  later today for gif sharing")
 					.setImage(payload)
 					channel.send({embeds:[embed]})
 				} 
@@ -108,30 +109,30 @@ async function CCS(client, noblox, currentUser, admin) {
 				}
 				const messages = [];
 				const game_ref = db.ref("szeebe").child("aa-universe-messages");
-				game_ref
-					.orderByKey()
-					.limitToLast(10)
-					.on("value", (querySnapshot) => {
-						querySnapshot.forEach((querySnapshot2) => {
-							console.log(new Date(), '| aa-universe.js | ',
-								querySnapshot2.key,
-								querySnapshot2.val()
-							);
-							querySnapshot2.forEach((thisObject) => {
-								iter = iter + 1;
-								console.log(new Date(), '| aa-universe.js | ', `iteration:`, iter);
-								const thisObjectNew = [];
-								thisObjectNew.push(thisObject.key);
-								thisObjectNew.push(thisObject.val());
-								console.log(new Date(), '| aa-universe.js | ', thisObjectNew);
-								messages.push(thisObjectNew);
-								console.log(new Date(), '| aa-universe.js | ', thisObject.key, thisObject.val());
-								if (iter == 10) {
+				//game_ref
+					//.orderByKey()
+					//.limitToLast(10)
+					//.on("value", (querySnapshot) => {
+						//querySnapshot.forEach((querySnapshot2) => {
+							//console.log(new Date(), '| aa-universe.js | ',
+								//querySnapshot2.key,
+								//querySnapshot2.val()
+							//);
+							//querySnapshot2.forEach((thisObject) => {
+								//iter = iter + 1;
+								//console.log(new Date(), '| aa-universe.js | ', `iteration:`, iter);
+								//const thisObjectNew = [];
+								//thisObjectNew.push(thisObject.key);
+								//thisObjectNew.push(thisObject.val());
+								//console.log(new Date(), '| aa-universe.js | ', thisObjectNew);
+								//.push(thisObjectNew);
+								////.log(new Date(), '| aa-universe.js | ', thisObject.key, thisObject.val());
+						//if (iter == 10) {
 									//syncGameData(iter, messages, channel, guild, thisObject, game_ref)
-								}
-							});
-						});
-					});
+								//}
+							//});
+						//});
+					//});
 			}
 			async function syncGameData(
 				iter,
@@ -176,7 +177,13 @@ async function CCS(client, noblox, currentUser, admin) {
 				});
 			}
 		}
+	} catch (error) {
+		console.log(new Date(), error)
+
+	}
 	});
+
 }
+
 
 module.exports = CCS;
