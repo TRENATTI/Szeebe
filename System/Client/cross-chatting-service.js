@@ -42,8 +42,24 @@ async function CCS(client, noblox, currentUser, admin) {
 				const members = await message.guild.members.fetch();
 				console.log(new Date(), '| aa-universe.js | ', `members acquired.`);
 				if (message.content.length < 1) return;
-				if (message.content.startsWith(`https://tenor.com`)) 
+				if (message.content.startsWith(`https://tenor.com/view`)) 
 				{ 
+					if (process.env.GOOGLEAPI_TENOR_KEY !== "") {
+						let id;
+						let payload;
+						  id = message.content.split("-").pop();
+						if (Number.isNaN(Number(id))) return;
+						const data = await fetch(`https://tenor.googleapis.com/v2/posts?media_filter=gif&limit=1&client_key=${process.env.GOOGLEAPI_CLIENT_TOKEN}&key=${process.env.GOOGLEAPI_TENOR_TOKEN}&ids=${id}`);
+						if (data.status === 429) {
+							payload = "https://trello.com/1/cards/670559c2f0271372c795aab9/attachments/670559d4acd55225d93f0dc8/download/caption.gif";
+						} else {
+
+						
+						const json = await data.json();
+						if (json.error) throw Error(json.error.message);
+						if (json.results.length === 0) return;
+						payload = json.results[0].media_formats.gif.url;
+					
                 const embed = new EmbedBuilder()
 				    .setAuthor({
 						name: message.author.username,
@@ -61,8 +77,12 @@ async function CCS(client, noblox, currentUser, admin) {
 							dynamic: "true"
 						})
 					})
-					.setImage(``)
-
+					.setDescription("Tenor Embed testing, patching  later today for gif sharing")
+					.setImage(payload)
+					channel.send({embeds:[embed]})
+				} 
+				
+			}
 				} else {
 				const embed = new EmbedBuilder()
 					.setColor(16747520)
