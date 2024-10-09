@@ -44,6 +44,29 @@ async function CCS(client, noblox, currentUser, admin) {
 				const members = await message.guild.members.fetch();
 				console.log(new Date(), '| aa-universe.js | ', `members acquired.`);
 				if (message.content.length < 1) return;
+				if (message.content.startsWith(`https://media.discord.app.net/`) || message.content.startsWith(`https://cdn.discordapp.com/`)) {
+					if (message.content.endsWith(`.gif`)){
+						const embed = new EmbedBuilder()
+						.setAuthor({
+							name: message.author.username,
+							iconURL: message.author.displayAvatarURL({
+								format: "png",
+								dynamic: true,
+							})
+						})
+						.setTimestamp()
+						.setFooter({
+							text:
+							`Alapha Universe | ${message.guild.name} | ${message.guild.size} Server Members`,
+							iconURL: message.guild.iconURL({
+								format: "png",
+								dynamic: "true"
+							})
+						})
+						.setImage(message.content || `https://trello.com/1/cards/670559c2f0271372c795aab9/attachments/6705f0621d4e9a247369b98a/download/caption.gif`)
+						channel.send({embeds:[embed]})
+					}
+				}
 				if (message.content.startsWith(`https://tenor.com/view`)) 
 				{ 
 					if (process.env.GOOGLEAPI_TENOR_KEY !== "") {
