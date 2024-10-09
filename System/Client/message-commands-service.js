@@ -18,15 +18,7 @@ const moduleNobloxFiles = fs
 
 //
 
-function commands(
-	client,
-	noblox,
-	currentUser,
-	admin,
-	token,
-	applicationid,
-	prefix
-) {
+function MCS(client, noblox, currentUser, admin, token, applicationid, prefix) {
 	client.commands_v12 = new Collection();
 	for (const file of moduleFiles) {
 		const commandFile = require("./Modules/" + file);
@@ -103,4 +95,4 @@ function commands(
 	});
 }
 
-module.exports = commands;
+module.exports = MCS;
