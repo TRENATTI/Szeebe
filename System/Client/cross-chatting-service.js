@@ -81,7 +81,7 @@ async function CCS(client, noblox, currentUser, admin) {
 							`https://cdn.discordapp.com/`
 						)
 					) {
-						if (message.content.endsWith(`.gif`)) {
+						if (message.content.includes(`.gif`)) {
 							const embed = new EmbedBuilder()
 								.setAuthor({
 									name: message.author.username,
