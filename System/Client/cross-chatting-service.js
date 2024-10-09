@@ -75,7 +75,7 @@ async function CCS(client, noblox, currentUser, admin) {
 					if (message.content.length < 1) return;
 					if (
 						message.content.startsWith(
-							`https://media.discord.app.net/`
+							`https://media.discordapp.net/`
 						) ||
 						message.content.startsWith(
 							`https://cdn.discordapp.com/`
