@@ -66,7 +66,8 @@ async function CCS(client, noblox, currentUser, admin) {
 						channel.id,
 						`acquired.`
 					);
-					const members = await message.guild.members.fetch();
+					let members = await message.guild.members.fetch().catch(console.log("Erroring"));
+					if (isNaN(members)) members = "Ratelimited";
 					console.log(
 						new Date(),
 						"| aa-universe.js | ",
