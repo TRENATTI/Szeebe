@@ -3,7 +3,7 @@ const { format } = require("path");
 require("dotenv").config();
 const { stringify } = require("querystring");
 async function CCS(client, noblox, currentUser, admin) {
-	if (process.env.DEVELOPER_MODE) return;
+	if (process.env.DEVELOPER_MODE === true) return;
 	var db = admin.database();
 	client.on("messageCreate", async (message) => {
 		if (message.author.bot) return;
@@ -67,7 +67,8 @@ async function CCS(client, noblox, currentUser, admin) {
 						channel.id,
 						`acquired.`
 					);
-					const members = await message.guild.members.fetch();
+					let members = await message.guild.members.fetch().catch(console.log("Erroring"));
+					if (isNaN(members)) members = "Ratelimited";
 					console.log(
 						new Date(),
 						"| aa-universe.js | ",
