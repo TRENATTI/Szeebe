@@ -3,7 +3,7 @@ const { format } = require("path");
 require("dotenv").config();
 const { stringify } = require("querystring");
 async function CCS(client, noblox, currentUser, admin) {
-	if (process.env.DEVELOPER_MODE) return;
+	if (process.env.DEVELOPER_MODE === true) return;
 	var db = admin.database();
 	client.on("messageCreate", async (message) => {
 		if (message.author.bot) return;
