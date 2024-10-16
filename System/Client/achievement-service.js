@@ -3,6 +3,7 @@ let timeData = [];
 let messageTimeData = [];
 const insane = true;
 function AS(client, noblox, currentUser, admin, token, applicationid, prefix) {
+	if (process.env.DEVELOPER_MODE) return;
 	console.log(new Date(), `| xp_system.js |`, `XP System online`);
 	client.on("messageCreate", (message) => {
 		let db = admin.database();
