@@ -77,7 +77,7 @@ function startApp(currentUser, client, admin) {
 
 	for (const file of serverFiles) {
 		const serverFile = require(`./System/Server/${file}`);
-		clientFile();
+		serverFile();
 	};
 }
 
