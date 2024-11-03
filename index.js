@@ -18,6 +18,7 @@ const admin = require("firebase-admin");
 // // //
 
 const clientSystem = "./System/Client";
+const serverSystem = "./System/Server"
 
 // // //
 
@@ -68,7 +69,16 @@ function startApp(currentUser, client, admin) {
 			applicationid,
 			prefix
 		);
-	}
+	};
+
+	const serverFiles = fs
+		.readdirSync(serverSystem)
+		.filter((file) => file.endsWith(".js"));
+
+	for (const file of serverFiles) {
+		const serverFile = require(`./System/Server/${file}`);
+		serverFile();
+	};
 }
 
 //

@@ -15,6 +15,7 @@ const moduleFiles = fs
 //
 
 function commands(client) {
+	if (process.env.DEVELOPER_MODE === true) return;
 	client.phrases_v12 = new Collection();
 	for (const file of moduleFiles) {
 		const phraseFile = require("./Phrases/" + file);
@@ -37,7 +38,7 @@ function commands(client) {
 						p.execute(message);
 					} catch {
 						//message.reply("Unavailable phrase!");
-						console.log("Failed!");
+						console.log(new Date(), "| phrases.js |", "Failed!");
 					}
 				}
 			}); //p.name).sort().join(",")
@@ -60,7 +61,7 @@ function commands(client) {
 				phrase.execute(message);
 			} catch {
 				//message.reply("Unavailable phrase!");
-				console.log("Failed!");
+				console.log(new Date(), "| phrases.js |", `Failed!`);
 			}
 		}
 	});

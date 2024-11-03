@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { ActivityType } = require("discord.js"); // Discord.js V14
-function status(
+function PS(
 	client,
 	noblox,
 	currentUser,
@@ -13,7 +13,7 @@ function status(
 	client.once("ready", () => {
 		console.log(
 			new Date(),
-			`| status.js | I'm in! Username: ${client.user.username}. User ID: ${client.user.id}`
+			`| status.js |`, `I'm in! Username: ${client.user.username}. User ID: ${client.user.id}`
 		);
 		//client.user.setActivity('\"' + prefix + '\"', {type: "LISTENING"});
 		const activities = [
@@ -45,4 +45,4 @@ function status(
 	});
 }
 
-module.exports = status;
+module.exports = PS;

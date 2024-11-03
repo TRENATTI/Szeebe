@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { ComponentType } = require("discord.js");
 
-async function tickets(
+async function TS(
 	client,
 	noblox,
 	currentUser,
@@ -11,6 +11,7 @@ async function tickets(
 	prefix
 ) {
 	client.once("ready", async () => {
+		if (process.env.DEVELOPER_MODE === true) return;
 		const guild = await client.guilds.fetch(`793960635628781618`);
 		const channel = await guild.channels.fetch("1235751537901568070");
 		const response = await channel.messages.fetch("1235757142506602526");
@@ -25,19 +26,19 @@ async function tickets(
 			collector.on("collect", async (i) => {
 				//response.deferReply()
 				//const selection = i.values[0];
-				console.log(i);
+				console.log(new Date(), `| tickets.js |`, i);
 				//if (selection == "button") {
 				response.reply({
 					content: `Thanks for testing, this will be out shortly!`,
 					ephemeral: true,
 				});
-				console.log("True!");
+				console.log(new Date(), `| tickets.js |`, `True!`);
 				//}
 			});
 		} catch (error) {
-			console.log(error);
+			console.log(new Date(), `| tickets.js |`, error);
 		}
 	});
 }
 
-module.exports = tickets;
+module.exports = TS;
