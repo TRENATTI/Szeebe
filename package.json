@@ -16,7 +16,7 @@
     "custom-logger": "^0.3.1",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "firebase-admin": "^12.6.0",
     "fs": "^0.0.1-security",
     "minecraft-status": "^1.1.0",
