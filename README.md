@@ -34,6 +34,7 @@ This repository is dedicated to the development of Trenati's Official Discord bo
 ```bash 
 git clone https://github.com/TRENATTI/FIREFLY.git
 cd FIREFLY
+npm i
 node index.js
 ```
 You will need to have a .env file with the required information. Use the example.env file for reference.
