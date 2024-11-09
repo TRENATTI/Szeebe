@@ -24,7 +24,7 @@ module.exports = {
 					{ name: "Remove", value: "remove" }
 				),
             option
-				.setName("addorremove")
+				.setName("type")
 				.setDescription("<add/remove>")
 				.setRequired(true)
 				.addChoices(
@@ -39,15 +39,44 @@ module.exports = {
 		cooldown: 15,
 	},
 	async execute(interaction, noblox, admin) {
+        const db = admin.database();
+		const bindedData = [];
+		var ref;
+		const addorremove = interaction.options.getString("addorremove");
+		console.log(addorremove)
+        if (addorremove == "add"){
+			doAddOrRemoveMathematicReasoning(true)
+		} else if (addorremove == "remove") {
+			ref = db.ref("blacklist/users");
+			doAddOrRemoveMathematicReasoning(false)
+		}
 
-module.exports = {
-    name: 'blacklist',
-    aliases: ['bl'],
-    description: `Add and remove blacklisting for groups and users.`,
-    usage: `<add/remove> <user/group> (user id/group id)`,
-    args: true,
-    execute(message, args, client, admin){
-        var db = admin.database();
+        async function doAddOrRemoveMathematicReasoning(value) {
+            const type = interaction.options.getString("type");
+            if (type == "groups"){
+                ref = db.ref("blacklist/groups");
+                doTypeReference(value, ref)
+            } else if (type == "users") {
+                ref = db.ref("blacklist/users");
+                doTypeReference(value, ref)
+            }
+        }
+
+        async function doTypeReference(value, ref){
+            const type = interaction.options.getString("input");
+            try {
+                const typeNumberValue = Number(type)
+                doInputBlacklist(value, ref, typeNumberValue)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        async function doInputBlacklist(value, ref, typeNumberValue) {
+
+
+        }
+
         if (args[0] == 'add'){ 
             addorremove('add')
         } else if (args[0] == 'remove') {
